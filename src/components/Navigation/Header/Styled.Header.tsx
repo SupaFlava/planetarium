@@ -14,6 +14,7 @@ export const StyledHeader = styled.div`
     font-weight: 400;
     letter-spacing: -1.05px;
     line-height: 100%;
+    margin: 0;
   }
 
   @media (min-width: 768px) {

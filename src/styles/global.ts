@@ -4,7 +4,6 @@ export const GlobalStyles = createGlobalStyle`
   html, body {
     margin: 0;
     padding: 0;
-      background:url(../assets/background-stars.svg);
 
 
   }
@@ -12,14 +11,13 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
   }
 body{
-  
+     background-color:#070724;
+     background-image: url(./assets/background-stars.svg);
 
-  background-color:#070724;
-  
+
  
 
     height: 100vh;
-
 
 
 }

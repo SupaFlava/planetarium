@@ -1,4 +1,4 @@
-import { StyledBurger } from "./Burger.styled";
+import { StyledBurger } from "./Styled.Burger";
 
 const Burger = () => {
   return (
