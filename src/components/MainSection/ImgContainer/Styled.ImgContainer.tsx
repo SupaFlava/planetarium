@@ -2,11 +2,16 @@ import { render } from "react-dom";
 import styled from "styled-components";
 
 export const ImgContainer = styled.div`
-  width: 100vw;
+  border: none;
+  max-width: 100vw;
   height: 304px;
-  resize: both;
-  overflow: hidden;
   display: flex;
   justify-content: center;
-  margin: auto;
+  align-items: center;
+
+  @media (min-width: 768px) {
+    height: 460px;
+  }
+  @media (min-width: 1440px) {
+  }
 `;

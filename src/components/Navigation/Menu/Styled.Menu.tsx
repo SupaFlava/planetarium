@@ -25,10 +25,6 @@ export const StyledMenu = styled.nav`
       color: ${({ theme }) => theme.colors.txtColor};
       text-decoration: none;
       transition: color 0.3s linear;
-
-      &:hover {
-        color: ${({ theme }) => theme.primaryHover};
-      }
     }
   }
 `;

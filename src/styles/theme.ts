@@ -14,7 +14,7 @@ export const theme = {
     neptuneColor: "#2D68f0",
   },
   fonts: {
-    headingFont: "Antonio, sans-serif",
+    headingFont: "Antonio , sans-serif",
     textFont: "League Spartan, sans-serif",
   },
 };
