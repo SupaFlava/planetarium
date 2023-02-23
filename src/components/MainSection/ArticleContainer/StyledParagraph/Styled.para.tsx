@@ -7,4 +7,5 @@ export const Para = styled.p`
   font-weight: 400;
   line-height: 22px;
   text-align: center;
+  opacity: 25%;
 `;

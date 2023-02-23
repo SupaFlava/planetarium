@@ -20,4 +20,7 @@ declare module "styled-components" {
       textFont: string;
     };
   }
+  logo: {
+    src: string;
+  }
 }

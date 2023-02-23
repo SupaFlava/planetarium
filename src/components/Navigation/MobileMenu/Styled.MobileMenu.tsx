@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const StyledMobileMenu = styled.nav`
   display: flex;
-  width: 100%;
+  /* width: 100%; */
   justify-content: space-between;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   padding: 20px 24px;

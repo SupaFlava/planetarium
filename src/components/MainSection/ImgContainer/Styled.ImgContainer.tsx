@@ -1,9 +1,8 @@
-import { render } from "react-dom";
 import styled from "styled-components";
 
 export const ImgContainer = styled.div`
   border: none;
-  max-width: 100vw;
+  /* max-width: 100vw; */
   height: 304px;
   display: flex;
   justify-content: center;

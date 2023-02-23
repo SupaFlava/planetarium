@@ -9,7 +9,10 @@ export const GlobalStyles = createGlobalStyle`
   }
   *, *::after, *::before {
     box-sizing: border-box;
-    border: 1px solid red;
+  }
+  *{
+        /* border: 1px solid red; */
+
   }
 body{
      background-color:#070724;
@@ -18,7 +21,6 @@ body{
 
  
 
-    height: 100vh;
 
 
 }
