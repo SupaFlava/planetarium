@@ -8,4 +8,9 @@ export const Para = styled.p`
   line-height: 22px;
   text-align: center;
   opacity: 25%;
+
+  @media (min-width: 1440px) {
+    font-size: 14px;
+    line-height: 25px;
+  }
 `;

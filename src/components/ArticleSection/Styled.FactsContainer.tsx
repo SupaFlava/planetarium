@@ -12,6 +12,6 @@ export const FactsContainer = styled.div`
     margin: 28px 40px;
   }
   @media (min-width: 1440px) {
-    margin: auto 165px;
-  }
+    margin: 0 165px 50px 165px;
+  } /* top | right | bottom | left */
 `;

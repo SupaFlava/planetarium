@@ -78,6 +78,11 @@ const Button = styled.button`
     letter-spacing: 2px;
     line-height: 25px;
   }
+
+  @media (min-width: 1440px) {
+    width: 350px;
+    font-size: 12px;
+  } ;
 `;
 
 export const MainSection = () => {
