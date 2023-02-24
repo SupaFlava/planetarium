@@ -13,7 +13,6 @@ export const StyledMenu = styled.nav`
     display: flex;
     width: 100%;
     justify-content: space-between;
-    padding: 0 50px;
     margin-bottom: 28px;
 
     a {

@@ -12,5 +12,8 @@ export const ImgContainer = styled.div`
     height: 460px;
   }
   @media (min-width: 1440px) {
+    width: 400px;
+    height: auto;
+    padding: 0;
   }
 `;

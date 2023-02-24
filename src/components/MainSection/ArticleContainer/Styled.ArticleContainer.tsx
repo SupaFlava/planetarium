@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Para } from "./StyledParagraph/Styled.para";
 import { Title } from "@/components/Navigation/Heading/Styled.heading";
+import { CtaContainer } from "../CTA/Styled.CtaContainer";
 
 export const ArticleContainer = styled.div`
   padding: 0 24px 28px;
@@ -11,19 +12,45 @@ export const ArticleContainer = styled.div`
 
   @media (min-width: 768px) {
     flex-direction: row;
+
+    align-items: baseline;
     justify-content: space-between;
     padding: 0 40px;
+    h1 {
+      font-size: 48px;
+      margin-bottom: 24px;
+    }
+    p {
+      margin-bottom: 32px;
+    }
+  }
+  @media (min-width: 1440px) {
+    flex-direction: column;
+    padding: 0;
+    gap: 30px;
   }
 `;
 
 const InfoDiv = styled.div`
-  width: 339px;
-`;
-const BtnContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 16px;
+  align-items: center;
+  width: 339px;
+  @media (min-width: 768px) {
+    align-items: flex-start;
+    p {
+      text-align: start;
+    }
+  }
+`;
+const BtnContainer = styled.div`
+  display: none;
+  @media (min-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 16px;
+  }
 `;
 
 const Button = styled.button`
@@ -65,6 +92,7 @@ export const MainSection = () => {
           with water. Earth's distance from the Sun, physical properties and
           geological history have allowed life to evolve and thrive.
         </Para>
+        <CtaContainer />
       </InfoDiv>
       <BtnContainer>
         <Button>

@@ -16,6 +16,11 @@ export const StyledHeader = styled.div`
 
   @media (min-width: 1440px) {
     display: flex;
+    flex-direction: row;
+    align-items: center;
     justify-content: space-between;
+    flex-wrap: nowrap;
+    gap: 600px;
+    white-space: nowrap;
   }
 `;

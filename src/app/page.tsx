@@ -17,6 +17,7 @@ import dummyImg from "../../public/assets/planet-earth.svg";
 import { MainSection } from "@/components/MainSection/ArticleContainer/Styled.ArticleContainer";
 
 import List from "@/components/ArticleSection/Styled.ListContainer";
+import { DesktopContainer } from "@/components/Responsive/Styled.desktopContainer";
 
 const Context = createContext(GlobalStyles);
 
@@ -25,11 +26,12 @@ export default function Home() {
     <ThemeProvider theme={theme}>
       <GlobalStyles />
       <NavBar></NavBar>
-      <ImgContainer>
-        <CoverImg src={dummyImg.src} />
-      </ImgContainer>
-      <MainSection></MainSection>
-
+      <DesktopContainer>
+        <ImgContainer>
+          <CoverImg src={dummyImg.src} />
+        </ImgContainer>
+        <MainSection></MainSection>
+      </DesktopContainer>
       <FactsContainer>
         <List></List>
       </FactsContainer>
