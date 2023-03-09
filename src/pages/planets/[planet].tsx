@@ -7,47 +7,66 @@ import { theme } from "@/styles/theme";
 import { CoverImg } from "@/components/MainSection/img/Styled.CoverImg";
 import { LandingStrip } from "@/components/Responsive/Styled.LandingStrip";
 import { FactsContainer } from "@/components/ArticleSection/Styled.FactsContainer";
-import dummyImg from "../../public/assets/planet-saturn.svg";
+import dummyImg from "../../../public/assets/planet-earth.svg";
 import { MainSection } from "@/components/MainSection/ArticleContainer/Styled.ArticleContainer";
 import List from "@/components/ArticleSection/Styled.ListContainer";
 import { DesktopContainer } from "@/components/Responsive/Styled.desktopContainer";
 import Planet from "@/pages/planets/[planet]";
-import { GetStaticProps } from "next";
+import { GetStaticPaths, GetStaticProps } from "next";
 import { PlanetInterface } from "@/types/PlanetInterface";
-import { getPlanets } from "apiClient/planetsApi";
+import { getPlanetByName, getPlanets } from "apiClient/planetsApi";
 
 // const Context = createContext(GlobalStyles);
 
 export default function Home(props: any) {
-  // const data = await getPlanets();
-  // console.log(data);
-  console.log("hello");
+  console.log(props);
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
       {true}
       <LandingStrip>
-        {/* <NavBar></NavBar>
+        <NavBar></NavBar>
         <DesktopContainer>
           <ImgContainer>
-            <CoverImg src={dummyImg.src} />
+            <CoverImg />
           </ImgContainer>
-          <MainSection></MainSection>
+          <MainSection planet={props.singlePlanet}></MainSection>
         </DesktopContainer>
         <FactsContainer>
           <List></List>
         </FactsContainer>
-        <Planet /> */}
       </LandingStrip>
     </ThemeProvider>
   );
 }
-// export const getStaticProps: GetStaticProps<{
-//   objectData: PlanetInterface;
-// }> = async (context) => {
-//   const objectData: PlanetInterface = await getPlanets();
-//   return {
-//     props: { objectData },
-//   };
-//   // will be passed to the page component as props
-// };
+export const getStaticPaths: GetStaticPaths = async () => {
+  const planets = await getPlanets();
+  const paths = planets.map((planet) => {
+    return {
+      params: {
+        planet: planet.name.toLowerCase(),
+      },
+    };
+  });
+  return {
+    paths: paths,
+    fallback: true,
+  };
+};
+
+export const getStaticProps: GetStaticProps<{
+  objectData: PlanetInterface;
+}> = async ({ params }) => {
+  console.log(params);
+  const objectData: PlanetInterface = await getPlanets();
+  const planetName = params;
+
+  const singlePlanet: PlanetInterface = await getPlanetByName(
+    planetName?.planet
+  );
+
+  return {
+    props: { objectData: objectData, singlePlanet: singlePlanet },
+  };
+  // will be passed to the page component as props
+};

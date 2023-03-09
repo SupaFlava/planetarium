@@ -1,21 +1,17 @@
 import React from "react";
 import { StyledMenu } from "./Styled.Menu";
+// import { planets } from "@/app/planetData";
 
 const Menu = () => {
   return (
-    <StyledMenu>
-      <a href="/">
-        <span role="img" aria-label="about us"></span>
-        MERCURY
-      </a>
-      <a href="/">VERNUS</a>
-      <a href="/">EARTH</a>
-      <a href="/">MARS</a>
-      <a href="/">JUPITER</a>
-      <a href="/">SATURN</a>
-      <a href="/">URANUS</a>
-      <a href="/">NEPTUNE</a>
-    </StyledMenu>
+    <></>
+    // <StyledMenu>
+    //   {planets.map((planet) => (
+    //     <a key={planet.name}>
+    //       <span>{planet.name}</span>
+    //     </a>
+    //   ))}
+    // </StyledMenu>
   );
 };
 export default Menu;

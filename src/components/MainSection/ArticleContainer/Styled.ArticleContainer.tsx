@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Children } from "react";
 import styled from "styled-components";
 import { Para } from "./StyledParagraph/Styled.para";
 import { Title } from "@/components/Navigation/Heading/Styled.heading";
@@ -28,6 +28,9 @@ export const ArticleContainer = styled.div`
     flex-direction: column;
     padding: 0;
     gap: 30px;
+    h1 {
+      font-size: 80px;
+    }
   }
 `;
 
@@ -41,6 +44,10 @@ const InfoDiv = styled.div`
     p {
       text-align: start;
     }
+  }
+
+  @media (min-width: 1440px) {
+    width: 350px;
   }
 `;
 const BtnContainer = styled.div`
@@ -85,18 +92,14 @@ const Button = styled.button`
   } ;
 `;
 
-export const MainSection = () => {
+export const MainSection = (planet: any) => {
+  console.log("prop from main", planet.planet[0].name);
   return (
     <ArticleContainer>
       <InfoDiv>
-        <Title>EARTH</Title>
+        <Title>{planet.planet[0].name}</Title>
 
-        <Para>
-          Third planet from the Sun and the only known planet to harbor life.
-          About 29.2% of Earth's surface is land with remaining 70.8% is covered
-          with water. Earth's distance from the Sun, physical properties and
-          geological history have allowed life to evolve and thrive.
-        </Para>
+        <Para>{planet.planet[0].overview.content}</Para>
         <CtaContainer />
       </InfoDiv>
       <BtnContainer>
