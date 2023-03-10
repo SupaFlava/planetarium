@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-export const CoverImg = styled.img.attrs(({ src: any }) => ({
-  src: "../../../../public/assets/planet-earth.svg",
+export const CoverImg = styled.img.attrs(({ src }) => ({
+  src: src,
   alt: "Article Cover",
 }))`
   max-height: 60%;

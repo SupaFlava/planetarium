@@ -10,4 +10,5 @@ export const Title = styled.h1`
   line-height: 100%;
   margin: 0;
   margin-bottom: 16px;
+  text-transform: uppercase;
 `;

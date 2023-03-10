@@ -3,32 +3,31 @@ import { NavBar } from "@/components/Navigation/NavBar";
 import { ImgContainer } from "@/components/MainSection/ImgContainer/Styled.ImgContainer";
 import { GlobalStyles } from "@/styles/global";
 import { theme } from "@/styles/theme";
-// import { createContext } from "react";
 import { CoverImg } from "@/components/MainSection/img/Styled.CoverImg";
 import { LandingStrip } from "@/components/Responsive/Styled.LandingStrip";
 import { FactsContainer } from "@/components/ArticleSection/Styled.FactsContainer";
-import dummyImg from "../../../public/assets/planet-earth.svg";
 import { MainSection } from "@/components/MainSection/ArticleContainer/Styled.ArticleContainer";
 import List from "@/components/ArticleSection/Styled.ListContainer";
 import { DesktopContainer } from "@/components/Responsive/Styled.desktopContainer";
-import Planet from "@/pages/planets/[planet]";
+import { createContext } from "react";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { PlanetInterface } from "@/types/PlanetInterface";
 import { getPlanetByName, getPlanets } from "apiClient/planetsApi";
 
-// const Context = createContext(GlobalStyles);
+export default function HomePlanet(props: any) {
+  const planetImg = props.singlePlanet[0].images.planet;
+  const Context = createContext(GlobalStyles);
 
-export default function Home(props: any) {
-  console.log(props);
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
       {true}
+
       <LandingStrip>
         <NavBar></NavBar>
         <DesktopContainer>
           <ImgContainer>
-            <CoverImg />
+            <CoverImg src={`../../../.${planetImg}`} />
           </ImgContainer>
           <MainSection planet={props.singlePlanet}></MainSection>
         </DesktopContainer>
@@ -41,7 +40,7 @@ export default function Home(props: any) {
 }
 export const getStaticPaths: GetStaticPaths = async () => {
   const planets = await getPlanets();
-  const paths = planets.map((planet) => {
+  const paths = planets.map((planet: any) => {
     return {
       params: {
         planet: planet.name.toLowerCase(),
@@ -50,7 +49,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   });
   return {
     paths: paths,
-    fallback: true,
+    fallback: false,
   };
 };
 

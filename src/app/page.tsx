@@ -15,7 +15,8 @@ import Planet from "@/pages/planets/[planet]";
 import { GetStaticProps } from "next";
 import { PlanetInterface } from "@/types/PlanetInterface";
 import { getPlanets } from "apiClient/planetsApi";
-
+import HomePlanet from "@/pages/planets/[planet]";
+// ("use client");
 // const Context = createContext(GlobalStyles);
 
 export default function Home(props: any) {
@@ -24,21 +25,7 @@ export default function Home(props: any) {
   console.log("hello");
   return (
     <ThemeProvider theme={theme}>
-      <GlobalStyles />
-      {true}
-      <LandingStrip>
-        {/* <NavBar></NavBar>
-        <DesktopContainer>
-          <ImgContainer>
-            <CoverImg src={dummyImg.src} />
-          </ImgContainer>
-          <MainSection></MainSection>
-        </DesktopContainer>
-        <FactsContainer>
-          <List></List>
-        </FactsContainer>
-        <Planet /> */}
-      </LandingStrip>
+      <HomePlanet />
     </ThemeProvider>
   );
 }
