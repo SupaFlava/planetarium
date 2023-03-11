@@ -6,8 +6,8 @@ import MobileMenu from "./MobileMenu/MobileMenu";
 import { StyledNavContainer } from "./NavContainer/Styled.navContainer";
 import { Title } from "./Heading/Styled.heading";
 
-export const NavBar = (planets: any) => {
-  console.log(planets.planets);
+export const NavBar = ({ props }: any) => {
+  const { planets, singlePlanet } = props;
   return (
     <>
       <StyledNavContainer>
@@ -15,7 +15,7 @@ export const NavBar = (planets: any) => {
           <Title>THE PLANETS</Title>
           <Burger />
 
-          <Menu planets={planets} />
+          <Menu props={props} />
         </StyledHeader>
       </StyledNavContainer>
       <MobileMenu />

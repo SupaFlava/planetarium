@@ -29,7 +29,7 @@ export default function HomePlanet(props: any) {
       {true}
 
       <LandingStrip>
-        <NavBar planets={planets}></NavBar>
+        <NavBar props={props}></NavBar>
         <DesktopContainer>
           <ImgContainer>
             <CoverImg src={"https:" + imgUrl} />

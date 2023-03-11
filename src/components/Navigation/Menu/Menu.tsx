@@ -1,14 +1,26 @@
 import React from "react";
 import { StyledMenu } from "./Styled.Menu";
 import Link from "next/link";
+import styled from "styled-components";
 
-const Menu = ({ planets }: any) => {
+export const AncherSpan = styled.span`
+  :hover {
+    border-top: 3px solid ${(props) => props.theme.colors[props.color]};
+  }
+`;
+
+const Menu = ({ props }: any) => {
+  const { planets, singlePlanet } = props;
+
+  const { slug } = singlePlanet[0].fields;
+
+  console.log(singlePlanet);
   return (
     <>
       <StyledMenu>
-        {planets.planets.map((planet: any) => (
+        {planets.map((planet: any) => (
           <Link href={planet.fields.slug} key={planet.sys.id}>
-            <span>{planet.fields.name}</span>
+            <AncherSpan color={slug}>{planet.fields.name}</AncherSpan>
           </Link>
         ))}
       </StyledMenu>
