@@ -89,17 +89,16 @@ const Button = styled.button`
   @media (min-width: 1440px) {
     width: 350px;
     font-size: 12px;
-  } ;
+  }
 `;
 
-export const MainSection = (planet: any) => {
-  console.log("prop from main", planet.planet[0].name);
+export const MainSection = ({ fields }: any) => {
   return (
     <ArticleContainer>
       <InfoDiv>
-        <Title>{planet.planet[0].name}</Title>
+        <Title>{fields.name}</Title>
 
-        <Para>{planet.planet[0].overview.content}</Para>
+        <Para>{fields.content}</Para>
         <CtaContainer />
       </InfoDiv>
       <BtnContainer>

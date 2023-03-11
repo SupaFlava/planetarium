@@ -6,14 +6,16 @@ import MobileMenu from "./MobileMenu/MobileMenu";
 import { StyledNavContainer } from "./NavContainer/Styled.navContainer";
 import { Title } from "./Heading/Styled.heading";
 
-export const NavBar = () => {
+export const NavBar = (planets: any) => {
+  console.log(planets.planets);
   return (
     <>
       <StyledNavContainer>
         <StyledHeader>
           <Title>THE PLANETS</Title>
           <Burger />
-          <Menu />
+
+          <Menu planets={planets} />
         </StyledHeader>
       </StyledNavContainer>
       <MobileMenu />

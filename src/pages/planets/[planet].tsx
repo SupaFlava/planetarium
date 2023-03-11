@@ -15,8 +15,13 @@ import { PlanetInterface } from "@/types/PlanetInterface";
 import { getPlanetByName, getPlanets } from "apiClient/planetsApi";
 
 export default function HomePlanet(props: any) {
-  const planetImg = props.singlePlanet[0].images.planet;
+  const { planets, singlePlanet } = props;
+  const { fields } = singlePlanet[0];
+
+  const imgUrl = fields.images[0].fields.file.url;
+  console.log(fields.images[0].fields.file.url);
   const Context = createContext(GlobalStyles);
+  console.log("context is ", Context);
 
   return (
     <ThemeProvider theme={theme}>
@@ -24,15 +29,15 @@ export default function HomePlanet(props: any) {
       {true}
 
       <LandingStrip>
-        <NavBar></NavBar>
+        <NavBar planets={planets}></NavBar>
         <DesktopContainer>
           <ImgContainer>
-            <CoverImg src={`../../../.${planetImg}`} />
+            <CoverImg src={"https:" + imgUrl} />
           </ImgContainer>
-          <MainSection planet={props.singlePlanet}></MainSection>
+          <MainSection fields={fields}></MainSection>
         </DesktopContainer>
         <FactsContainer>
-          <List></List>
+          <List fields={fields}></List>
         </FactsContainer>
       </LandingStrip>
     </ThemeProvider>
@@ -43,7 +48,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const paths = planets.map((planet: any) => {
     return {
       params: {
-        planet: planet.name.toLowerCase(),
+        planet: planet.fields.name.toLowerCase(),
       },
     };
   });
@@ -53,19 +58,15 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps<{
-  objectData: PlanetInterface;
-}> = async ({ params }) => {
+export const getStaticProps: GetStaticProps<{}> = async ({ params }) => {
   console.log(params);
-  const objectData: PlanetInterface = await getPlanets();
+  const planets = await getPlanets();
   const planetName = params;
 
-  const singlePlanet: PlanetInterface = await getPlanetByName(
-    planetName?.planet
-  );
+  const singlePlanet = await getPlanetByName(planetName?.planet);
 
   return {
-    props: { objectData: objectData, singlePlanet: singlePlanet },
+    props: { planets: planets, singlePlanet: singlePlanet },
   };
   // will be passed to the page component as props
 };

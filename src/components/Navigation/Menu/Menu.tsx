@@ -1,17 +1,18 @@
 import React from "react";
 import { StyledMenu } from "./Styled.Menu";
-// import { planets } from "@/app/planetData";
+import Link from "next/link";
 
-const Menu = () => {
+const Menu = ({ planets }: any) => {
   return (
-    <></>
-    // <StyledMenu>
-    //   {planets.map((planet) => (
-    //     <a key={planet.name}>
-    //       <span>{planet.name}</span>
-    //     </a>
-    //   ))}
-    // </StyledMenu>
+    <>
+      <StyledMenu>
+        {planets.planets.map((planet: any) => (
+          <Link href={planet.fields.slug} key={planet.sys.id}>
+            <span>{planet.fields.name}</span>
+          </Link>
+        ))}
+      </StyledMenu>
+    </>
   );
 };
 export default Menu;

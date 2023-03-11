@@ -11,6 +11,9 @@ export const ListContainer = styled.div`
   justify-content: space-between;
 
   gap: 24px;
+  :hover {
+    background-color: ${(props) => props.theme.colors[props.color]};
+  }
   @media (min-width: 768px) {
     flex-direction: column;
     padding: 15px;
@@ -54,24 +57,26 @@ export const TxtHeading = styled.h2`
   color: ${(props) => props.theme.colors.txtColor};
   text-transform: uppercase;
 `;
-export default function List() {
+export default function List({ fields }: any) {
+  const { rotation, revolution, radius, temperature, slug } = fields;
+
   return (
     <>
-      <ListContainer>
+      <ListContainer color={slug}>
         <SpanTxt>Rotation Time</SpanTxt>
-        <TxtHeading>18.8 hours</TxtHeading>
+        <TxtHeading>{rotation}</TxtHeading>
       </ListContainer>
-      <ListContainer>
+      <ListContainer color={slug}>
         <SpanTxt>REVOLUTION TIME</SpanTxt>
-        <TxtHeading>29.46 years</TxtHeading>
+        <TxtHeading>{revolution}</TxtHeading>
       </ListContainer>
-      <ListContainer>
+      <ListContainer color={slug}>
         <SpanTxt>Radius</SpanTxt>
-        <TxtHeading>58,232 km</TxtHeading>
+        <TxtHeading>{radius}</TxtHeading>
       </ListContainer>
-      <ListContainer>
+      <ListContainer color={slug}>
         <SpanTxt>AVERAGE TEMP.</SpanTxt>
-        <TxtHeading>16°c</TxtHeading>
+        <TxtHeading>{temperature}</TxtHeading>
       </ListContainer>
     </>
   );

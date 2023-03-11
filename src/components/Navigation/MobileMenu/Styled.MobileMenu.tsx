@@ -18,6 +18,7 @@ export const StyledMobileMenu = styled.nav`
     letter-spacing: 1.93px;
     opacity: 50%;
   }
+
   @media (min-width: 768px) {
     display: none;
   }

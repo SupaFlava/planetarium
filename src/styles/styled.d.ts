@@ -6,14 +6,14 @@ declare module "styled-components" {
     colors: {
       txtColor: string;
       bgColor: string;
-      mercuryColor: string;
-      venusColor: string;
-      earthColor: string;
-      marsColor: string;
-      jupiterColor: string;
-      saturnColor: string;
-      uranusColor: string;
-      neptuneColor: string;
+      mercury: string;
+      venus: string;
+      earth: string;
+      mars: string;
+      jupiter: string;
+      saturn: string;
+      uranus: string;
+      neptune: string;
     };
     fonts: {
       headingFont: string;

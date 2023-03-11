@@ -7,7 +7,7 @@ export const Para = styled.p`
   font-weight: 400;
   line-height: 22px;
   text-align: center;
-  opacity: 25%;
+  opacity: 50%;
 
   @media (min-width: 1440px) {
     font-size: 14px;
