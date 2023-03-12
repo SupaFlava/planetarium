@@ -5,6 +5,8 @@ export const GlobalStyles = createGlobalStyle`
   html, body {
     margin: 0;
     padding: 0;
+         
+
 
 
   }
@@ -18,6 +20,8 @@ export const GlobalStyles = createGlobalStyle`
 body{
      background-color:#070724;
      background-image: url(/assets/background-stars.svg);
+   
+
 
  
 
