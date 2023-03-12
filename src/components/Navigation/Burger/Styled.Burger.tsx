@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledBurger = styled.button`
+export const StyledBurger = styled.button<{ open: boolean }>`
   display: flex;
   flex-direction: column;
   justify-content: space-around;

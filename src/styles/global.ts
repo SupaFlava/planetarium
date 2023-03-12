@@ -1,7 +1,5 @@
 import { createGlobalStyle } from "styled-components";
 
-import starBackground from "../../public/assets/background-stars.svg";
-
 export const GlobalStyles = createGlobalStyle`
 
   html, body {
@@ -19,7 +17,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 body{
      background-color:#070724;
-     /* background-image: url(${starBackground}); */
+     background-image: url(/assets/background-stars.svg);
 
  
 

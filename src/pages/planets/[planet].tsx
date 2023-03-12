@@ -21,7 +21,7 @@ export default function HomePlanet(props: any) {
   const imgUrl = fields.images[0].fields.file.url;
   console.log(fields.images[0].fields.file.url);
   const Context = createContext(GlobalStyles);
-  console.log("context is ", Context);
+  console.log("context is ", imgUrl);
 
   return (
     <ThemeProvider theme={theme}>

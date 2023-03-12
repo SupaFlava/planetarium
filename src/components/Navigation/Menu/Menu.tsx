@@ -3,9 +3,14 @@ import { StyledMenu } from "./Styled.Menu";
 import Link from "next/link";
 import styled from "styled-components";
 
-export const AncherSpan = styled.span`
-  :hover {
-    border-top: 3px solid ${(props) => props.theme.colors[props.color]};
+export const AncherDiv = styled.div<{ color: string }>`
+  @media (min-width: 1440px) {
+    border: 2px solid transparent;
+    box-sizing: border-box;
+    padding: 26px 0;
+    :hover {
+      border-top: 2px solid ${(props) => props.theme.colors[props.color]};
+    }
   }
 `;
 
@@ -19,9 +24,11 @@ const Menu = ({ props }: any) => {
     <>
       <StyledMenu>
         {planets.map((planet: any) => (
-          <Link href={planet.fields.slug} key={planet.sys.id}>
-            <AncherSpan color={slug}>{planet.fields.name}</AncherSpan>
-          </Link>
+          <AncherDiv color={slug}>
+            <Link href={planet.fields.slug} key={planet.sys.id}>
+              <span>{planet.fields.name}</span>
+            </Link>
+          </AncherDiv>
         ))}
       </StyledMenu>
     </>

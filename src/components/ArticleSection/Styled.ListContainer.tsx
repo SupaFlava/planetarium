@@ -12,7 +12,7 @@ export const ListContainer = styled.div`
 
   gap: 24px;
   :hover {
-    background-color: ${(props) => props.theme.colors[props.color]};
+    background-color: ${(props) => props.theme.colors ?? [props.color]};
   }
   @media (min-width: 768px) {
     flex-direction: column;
@@ -62,19 +62,19 @@ export default function List({ fields }: any) {
 
   return (
     <>
-      <ListContainer color={slug}>
+      <ListContainer>
         <SpanTxt>Rotation Time</SpanTxt>
         <TxtHeading>{rotation}</TxtHeading>
       </ListContainer>
-      <ListContainer color={slug}>
+      <ListContainer>
         <SpanTxt>REVOLUTION TIME</SpanTxt>
         <TxtHeading>{revolution}</TxtHeading>
       </ListContainer>
-      <ListContainer color={slug}>
+      <ListContainer>
         <SpanTxt>Radius</SpanTxt>
         <TxtHeading>{radius}</TxtHeading>
       </ListContainer>
-      <ListContainer color={slug}>
+      <ListContainer>
         <SpanTxt>AVERAGE TEMP.</SpanTxt>
         <TxtHeading>{temperature}</TxtHeading>
       </ListContainer>

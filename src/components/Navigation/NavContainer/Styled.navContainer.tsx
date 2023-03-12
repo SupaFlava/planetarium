@@ -7,6 +7,6 @@ export const StyledNavContainer = styled.div`
     padding: 30px 50px;
   }
   @media (min-width: 1440px) {
-    padding: 22px 32px;
+    padding: 0px 32px;
   }
 `;
