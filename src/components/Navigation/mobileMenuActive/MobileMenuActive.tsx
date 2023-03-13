@@ -14,8 +14,11 @@ const MenuActive = styled.div<{ open: boolean }>`
   position: absolute;
   z-index: 5;
   flex-direction: column;
-  display: ${({ open }) => (open ? "flex" : "none")};
   color: ${(props) => props.theme.colors.txtColor};
+  transform: ${({ open }) => (open ? "translateX(0)" : "translateX(-100%)")};
+  transition: all 0.5s ease-in-out;
+
+  display: ${({ open }) => (open ? "flex" : "none")};
 `;
 
 const SeperationDiv = styled.div`

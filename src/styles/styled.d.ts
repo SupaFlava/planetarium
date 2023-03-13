@@ -23,4 +23,5 @@ declare module "styled-components" {
   logo: {
     src: string;
   }
+  export type Tcolor = keyof DefaultTheme["colors"];
 }

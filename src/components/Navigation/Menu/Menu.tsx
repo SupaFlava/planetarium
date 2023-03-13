@@ -1,9 +1,9 @@
 import React from "react";
 import { StyledMenu } from "./Styled.Menu";
 import Link from "next/link";
-import styled from "styled-components";
+import styled, { Tcolor } from "styled-components";
 
-export const AncherDiv = styled.div<{ color: string }>`
+export const AncherDiv = styled.div<{ color: Tcolor }>`
   @media (min-width: 1440px) {
     border: 2px solid transparent;
     box-sizing: border-box;
