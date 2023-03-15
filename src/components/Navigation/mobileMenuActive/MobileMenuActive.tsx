@@ -53,9 +53,9 @@ export default function MobileMenuActive({ open, planets }: any) {
   return (
     <MenuActive open={open}>
       {planets.map((planet: any) => (
-        <ActiveContainer>
+        <ActiveContainer key={planet.sys.id}>
           <SeperationDiv>
-            <Cirlce slug={planet.fields.slug} />
+            <Cirlce color={planet.fields.slug} />
             <Link style={{ textDecoration: "none" }} href={planet.fields.slug}>
               <h3>{planet.fields.name}</h3>
             </Link>

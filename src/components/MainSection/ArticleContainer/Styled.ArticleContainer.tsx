@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { Para } from "./StyledParagraph/Styled.para";
 import { Title } from "@/components/Navigation/Heading/Styled.heading";
 import { CtaContainer } from "../CTA/Styled.CtaContainer";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 export const ArticleContainer = styled.div`
   padding: 0 24px 28px;
@@ -38,7 +40,7 @@ const InfoDiv = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 339px;
+  max-width: 340px;
   @media (min-width: 768px) {
     align-items: flex-start;
     p {
@@ -47,7 +49,7 @@ const InfoDiv = styled.div`
   }
 
   @media (min-width: 1440px) {
-    width: 350px;
+    max-width: 350px;
   }
 `;
 const BtnContainer = styled.div`
@@ -93,27 +95,49 @@ const Button = styled.button`
 `;
 
 export const MainSection = ({ fields }: any) => {
+  console.log("From main section thingy", { fields });
+  const router = useRouter();
+  console.log(router.query.subpage);
+  let paraContent = fields.content;
+  if (router.query.subpage === "structure") {
+    paraContent = fields.structureContent;
+  } else if (router.query.subpage === "geology") {
+    paraContent = fields.geologyContent;
+  }
+
   return (
     <ArticleContainer>
       <InfoDiv>
         <Title>{fields.name}</Title>
 
-        <Para>{fields.content}</Para>
+        <Para>{paraContent}</Para>
         <CtaContainer />
       </InfoDiv>
       <BtnContainer>
-        <Button>
-          <span>01</span>
-          <h3>Overview</h3>
-        </Button>
-        <Button>
-          <span>02</span>
-          <h3>Internal Structure</h3>
-        </Button>
-        <Button>
-          <span>03</span>
-          <h3>Surface Geology</h3>
-        </Button>
+        <Link href="/planets/" as={`/planets/${fields.slug}`}>
+          <Button>
+            <span>01</span>
+            <h3>Overview</h3>
+          </Button>
+        </Link>
+        <Link
+          href="/planets/[planet]/surface"
+          as={`/planets/${fields.slug}/surface`}
+        >
+          <Button>
+            <span>02</span>
+            <h3>Internal Structure</h3>
+          </Button>
+        </Link>
+        <Link
+          href="/planets/[planet]/geology"
+          as={`/planets/${fields.slug}/geology`}
+        >
+          <Button>
+            <span>03</span>
+            <h3>Surface Geology</h3>
+          </Button>
+        </Link>
       </BtnContainer>
     </ArticleContainer>
   );

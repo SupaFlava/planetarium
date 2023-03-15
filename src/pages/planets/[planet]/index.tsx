@@ -13,6 +13,7 @@ import { createContext } from "react";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { PlanetInterface } from "@/types/PlanetInterface";
 import { getPlanetByName, getPlanets } from "apiClient/planetsApi";
+import { Router, useRouter } from "next/router";
 
 export default function HomePlanet(props: any) {
   const { planets, singlePlanet } = props;
@@ -20,7 +21,6 @@ export default function HomePlanet(props: any) {
 
   const imgUrl = fields.images[0].fields.file.url;
   console.log(fields.images[0].fields.file.url);
-  const Context = createContext(GlobalStyles);
   console.log("context is ", imgUrl);
 
   return (
@@ -45,13 +45,16 @@ export default function HomePlanet(props: any) {
 }
 export const getStaticPaths: GetStaticPaths = async () => {
   const planets = await getPlanets();
-  const paths = planets.map((planet: any) => {
-    return {
-      params: {
-        planet: planet.fields.name.toLowerCase(),
-      },
-    };
-  });
+  const paths = planets.flatMap((planet: any) => [
+    { params: { planet: planet.fields.name.toLowerCase() } },
+    {
+      params: { planet: planet.fields.name.toLowerCase(), subpage: "geology" },
+    },
+    {
+      params: { planet: planet.fields.name.toLowerCase(), subpage: "surface" },
+    },
+  ]);
+
   return {
     paths: paths,
     fallback: false,
@@ -59,7 +62,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps<{}> = async ({ params }) => {
-  console.log(params);
   const planets = await getPlanets();
   const planetName = params;
 
@@ -68,5 +70,6 @@ export const getStaticProps: GetStaticProps<{}> = async ({ params }) => {
   return {
     props: { planets: planets, singlePlanet: singlePlanet },
   };
+
   // will be passed to the page component as props
 };

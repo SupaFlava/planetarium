@@ -2,7 +2,7 @@ import { ThemeProvider } from "styled-components";
 
 export const theme = {
   colors: {
-    txtColor: "fff",
+    txtColor: "#ffff",
     bgColor: "#070724",
     mercury: "#419EBB",
     venus: "#eda249",

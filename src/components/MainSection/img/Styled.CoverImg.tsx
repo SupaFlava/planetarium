@@ -11,6 +11,6 @@ export const CoverImg = styled.img.attrs(({ src }) => ({
   }
 
   @media (min-width: 1440px) {
-    max-height: 100%;
+    max-height: 50%;
   }
 `;
