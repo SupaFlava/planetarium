@@ -22,7 +22,6 @@ import HomePlanet from "@/pages/planets/[planet]";
 export default function Home(props: any) {
   // const data = await getPlanets();
   // console.log(data);
-  console.log("hello");
   return (
     <ThemeProvider theme={theme}>
       <HomePlanet />

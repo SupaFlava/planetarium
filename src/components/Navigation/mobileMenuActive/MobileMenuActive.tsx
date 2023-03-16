@@ -8,9 +8,9 @@ const MenuActive = styled.div<{ open: boolean }>`
   background-image: url(/assets/background-stars.svg);
   top: 78px;
   left: 0;
-  height: 150vh;
+  height: 70%;
   padding-top: 44px;
-  width: 99vw;
+  width: 100%;
   position: absolute;
   z-index: 5;
   flex-direction: column;
@@ -19,6 +19,10 @@ const MenuActive = styled.div<{ open: boolean }>`
   transition: all 0.5s ease-in-out;
 
   display: ${({ open }) => (open ? "flex" : "none")};
+
+  @media (min-width: 768px) {
+    display: none;
+  }
 `;
 
 const SeperationDiv = styled.div`
@@ -28,8 +32,8 @@ const SeperationDiv = styled.div`
   gap: 25px;
 `;
 const ActiveContainer = styled.div`
-  max-width: 96vw;
-  height: 65px;
+  max-width: auto;
+  max-height: auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -49,7 +53,6 @@ const ActiveContainer = styled.div`
 `;
 
 export default function MobileMenuActive({ open, planets }: any) {
-  console.log(planets);
   return (
     <MenuActive open={open}>
       {planets.map((planet: any) => (

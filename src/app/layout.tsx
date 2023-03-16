@@ -2,7 +2,7 @@ import StyledComponentsRegistry from "@/lib/registry";
 import { Antonio, League_Spartan } from "@next/font/google";
 
 const antonio = Antonio({
-  weight: "500",
+  weight: ["400", "500"],
   subsets: ["latin"],
 });
 const spartan = League_Spartan({

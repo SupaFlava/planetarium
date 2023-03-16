@@ -1,56 +1,28 @@
 import React from "react";
-import { useRouter } from "next/router";
 import { GetStaticPaths, GetStaticProps } from "next/types";
-import { NavBar } from "@/components/Navigation/NavBar";
 import { getPlanetByName, getPlanets } from "apiClient/planetsApi";
-import { ThemeProvider } from "styled-components";
-import { GlobalStyles } from "@/styles/global";
-import { LandingStrip } from "@/components/Responsive/Styled.LandingStrip";
-import { DesktopContainer } from "@/components/Responsive/Styled.desktopContainer";
-import { ImgContainer } from "@/components/MainSection/ImgContainer/Styled.ImgContainer";
-import { MainSection } from "@/components/MainSection/ArticleContainer/Styled.ArticleContainer";
-import { FactsContainer } from "@/components/ArticleSection/Styled.FactsContainer";
-import List from "@/components/ArticleSection/Styled.ListContainer";
-import { CoverImg } from "@/components/MainSection/img/Styled.CoverImg";
-import { theme } from "@/styles/theme";
-import { GeologyImg } from "@/components/MainSection/img/Style.GeologyImg";
+import { Entry } from "contentful";
+
+import PlanetPage from "@/components/PlanetPage";
 
 export default function Subpage(props: any) {
-  const { planets, singlePlanet } = props;
+  console.log("propps ", props);
+  const { planets, singlePlanet, imgUrl, geoImg, content, source, subpage } =
+    props;
   const { fields } = singlePlanet[0];
+  console.log(geoImg, subpage);
 
-  let imgUrl = fields.images[0].fields.file.url;
-  console.log(fields.images);
-  let geoImg;
-  const router = useRouter();
-  if (router.query.subpage === "surface") {
-    imgUrl = fields.images[1].fields.file.url;
-  } else if (router.query.subpage === "geology") {
-    geoImg = fields.images[2].fields.file.url;
-  }
-
-  // Render content for the subpage
   return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyles />
-      {true}
-
-      <LandingStrip>
-        <NavBar props={props}></NavBar>
-        <DesktopContainer>
-          <ImgContainer>
-            <CoverImg src={"https:" + imgUrl} />
-            {router.query.subpage === "geology" && (
-              <GeologyImg src={"https:" + geoImg} />
-            )}
-          </ImgContainer>
-          <MainSection fields={fields}></MainSection>
-        </DesktopContainer>
-        <FactsContainer>
-          <List fields={fields}></List>
-        </FactsContainer>
-      </LandingStrip>
-    </ThemeProvider>
+    <PlanetPage
+      subpage={subpage}
+      content={content}
+      source={source}
+      imgUrl={imgUrl}
+      geoImg={geoImg}
+      fields={fields}
+      planets={planets}
+      singlePlanet={singlePlanet}
+    />
   );
 }
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -75,8 +47,29 @@ export const getStaticProps: GetStaticProps<{}> = async ({ params }) => {
   const planetName = params;
 
   const singlePlanet = await getPlanetByName(planetName?.planet);
+  let imgUrl = singlePlanet[0].fields.images[0].fields.file.url;
+  let geoImg = null;
+  let content;
+  let source;
+  if (params?.subpage === "surface") {
+    content = singlePlanet[0].fields.structureContent;
+    source = singlePlanet[0].fields.structureSource;
+    imgUrl = singlePlanet[0].fields.images[1].fields.file.url;
+  } else if (params?.subpage === "geology") {
+    content = singlePlanet[0].fields.geologyContent;
+    source = singlePlanet[0].fields.geologySource;
+    geoImg = singlePlanet[0].fields.images[2].fields.file.url;
+  }
 
   return {
-    props: { planets: planets, singlePlanet: singlePlanet },
+    props: {
+      planets: planets,
+      singlePlanet: singlePlanet,
+      imgUrl: imgUrl,
+      geoImg: geoImg,
+      content,
+      source,
+      subpage: params?.subpage,
+    },
   };
 };

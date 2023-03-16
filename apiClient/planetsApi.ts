@@ -1,11 +1,14 @@
-import { createClient } from "contentful";
+import { IPlanetFields } from "@types/generated/contentful";
+import { ContentfulCollection, createClient, Entry } from "contentful";
 
 export async function getPlanets() {
   const client = createClient({
     space: process.env.CONTENTFUL_SPACE_ID,
     accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
   });
-  const res = await client.getEntries({ content_type: "planet" });
+  const res = await client.getEntries<IPlanetFields>({
+    content_type: "planet",
+  });
   const planets = res.items;
 
   return planets;

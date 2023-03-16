@@ -2,28 +2,6 @@
 
 import { Asset, Entry } from "contentful";
 
-export interface IBackgroundFields {
-  /** background img */
-  backgroundImg?: Asset | undefined;
-}
-
-export interface IBackground extends Entry<IBackgroundFields> {
-  sys: {
-    id: string;
-    type: string;
-    createdAt: string;
-    updatedAt: string;
-    locale: string;
-    contentType: {
-      sys: {
-        id: "background";
-        linkType: "ContentType";
-        type: "Link";
-      };
-    };
-  };
-}
-
 export interface IPlanetFields {
   /** name */
   name: string;
@@ -40,37 +18,37 @@ export interface IPlanetFields {
     | "jupiter";
 
   /** Overview content */
-  content?: string | undefined;
+  content: string;
 
   /** Overview source */
-  overviewSource?: string | undefined;
+  overviewSource: string;
 
   /** Structure content */
-  structureContent?: string | undefined;
+  structureContent: string;
 
   /** Structure source  */
-  structureSource?: string | undefined;
+  structureSource: string;
 
   /** geology content */
-  geologyContent?: string | undefined;
+  geologyContent: string;
 
   /** geology source */
-  geologySource?: string | undefined;
+  geologySource: string;
 
   /** rotation */
-  rotation?: string | undefined;
+  rotation: string;
 
   /** revolution */
-  revolution?: string | undefined;
+  revolution: string;
 
   /** radius */
-  radius?: string | undefined;
+  radius: string;
 
   /** temperature */
-  temperature?: string | undefined;
+  temperature: string;
 
   /** images */
-  images?: Asset[] | undefined;
+  images: Asset[];
 }
 
 export interface IPlanet extends Entry<IPlanetFields> {
@@ -90,9 +68,9 @@ export interface IPlanet extends Entry<IPlanetFields> {
   };
 }
 
-export type CONTENT_TYPE = "background" | "planet";
+export type CONTENT_TYPE = "planet";
 
-export type IEntry = IBackground | IPlanet;
+export type IEntry = IPlanet;
 
 export type LOCALE_CODE = "en-US";
 

@@ -8,7 +8,8 @@ import { Title } from "./Heading/Styled.heading";
 import MobileMenuActive from "./mobileMenuActive/MobileMenuActive";
 
 export const NavBar = ({ props }: any) => {
-  const { planets, singlePlanet } = props;
+  const { planets, singlePlanet, subpage } = props;
+  console.log("props in the navvvv", props);
   const [open, setOpen] = useState<boolean>(false);
   const close = () => setOpen(false);
   return (
@@ -21,7 +22,7 @@ export const NavBar = ({ props }: any) => {
           <Menu props={props} />
         </StyledHeader>
       </StyledNavContainer>
-      <MobileMenu />
+      <MobileMenu props={props} />
     </>
   );
 };

@@ -1,5 +1,5 @@
-import React, { Children } from "react";
-import styled from "styled-components";
+import React, { Children, useState } from "react";
+import styled, { Tcolor } from "styled-components";
 import { Para } from "./StyledParagraph/Styled.para";
 import { Title } from "@/components/Navigation/Heading/Styled.heading";
 import { CtaContainer } from "../CTA/Styled.CtaContainer";
@@ -62,10 +62,11 @@ const BtnContainer = styled.div`
   }
 `;
 
-const Button = styled.button`
+const Button = styled.button<{ color: Tcolor; isActive: boolean }>`
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  cursor: pointer;
   gap: 14px;
   width: 280px;
   text-transform: uppercase;
@@ -75,6 +76,11 @@ const Button = styled.button`
   font-family: ${(props) => props.theme.fonts.textFont};
   font-size: 9px;
   font-style: bold;
+  background-color: ${(props) =>
+    props.isActive ? props.theme.colors[props.color] : ""};
+  :hover {
+    background-color: #38384f;
+  }
 
   span {
     margin-left: 20px;
@@ -94,46 +100,31 @@ const Button = styled.button`
   }
 `;
 
-export const MainSection = ({ fields }: any) => {
-  console.log("From main section thingy", { fields });
-  const router = useRouter();
-  console.log(router.query.subpage);
-  let paraContent = fields.content;
-  if (router.query.subpage === "structure") {
-    paraContent = fields.structureContent;
-  } else if (router.query.subpage === "geology") {
-    paraContent = fields.geologyContent;
-  }
-
+export const MainSection = ({ slug, name, content, source, subpage }: any) => {
   return (
     <ArticleContainer>
       <InfoDiv>
-        <Title>{fields.name}</Title>
+        <Title>{name}</Title>
 
-        <Para>{paraContent}</Para>
+        <Para>{content}</Para>
         <CtaContainer />
       </InfoDiv>
       <BtnContainer>
-        <Link href="/planets/" as={`/planets/${fields.slug}`}>
-          <Button>
+        <Link href={`/planets/${slug}`}>
+          {subpage === "geology"}
+          <Button isActive={!subpage} color={slug}>
             <span>01</span>
             <h3>Overview</h3>
           </Button>
         </Link>
-        <Link
-          href="/planets/[planet]/surface"
-          as={`/planets/${fields.slug}/surface`}
-        >
-          <Button>
+        <Link href={`/planets/${slug}/surface`}>
+          <Button isActive={subpage === "surface"} color={slug}>
             <span>02</span>
             <h3>Internal Structure</h3>
           </Button>
         </Link>
-        <Link
-          href="/planets/[planet]/geology"
-          as={`/planets/${fields.slug}/geology`}
-        >
-          <Button>
+        <Link href={`/planets/${slug}/geology`}>
+          <Button isActive={subpage === "geology"} color={slug}>
             <span>03</span>
             <h3>Surface Geology</h3>
           </Button>

@@ -24,11 +24,11 @@ const Menu = ({ props }: any) => {
     <>
       <StyledMenu>
         {planets.map((planet: any) => (
-          <AncherDiv color={slug} key={planet.sys.id}>
-            <Link
-              href={`/planets/${planet.fields.slug}`}
-              as={`/planets/${planet.fields.slug}`}
-            >
+          <AncherDiv
+            color={planet.fields.name.toLowerCase()}
+            key={planet.sys.id}
+          >
+            <Link href={`/planets/${planet.fields.slug}`}>
               <span>{planet.fields.name}</span>
             </Link>
           </AncherDiv>
