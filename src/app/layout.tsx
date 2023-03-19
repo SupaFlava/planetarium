@@ -21,7 +21,7 @@ export default function RootLayout({
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
-      <body className={`${antonio.className}${spartan.className}`}>
+      <body className={`${antonio.className} ,${spartan.className}`}>
         {" "}
         <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
       </body>

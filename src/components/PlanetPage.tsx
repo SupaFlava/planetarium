@@ -10,6 +10,16 @@ import { MainSection } from "@/components/MainSection/ArticleContainer/Styled.Ar
 import List from "@/components/ArticleSection/Styled.ListContainer";
 import { DesktopContainer } from "@/components/Responsive/Styled.desktopContainer";
 import { GeologyImg } from "./MainSection/img/Style.GeologyImg";
+import { Antonio, League_Spartan } from "@next/font/google";
+
+const antonio = Antonio({
+  weight: ["400", "500"],
+  subsets: ["latin"],
+});
+const spartan = League_Spartan({
+  weight: ["400", "600"],
+  subsets: ["latin"],
+});
 
 export default function PlanetPage(props: any) {
   const {
@@ -27,7 +37,7 @@ export default function PlanetPage(props: any) {
       <GlobalStyles />
       {true}
 
-      <LandingStrip>
+      <LandingStrip className={`${antonio.className} ,${spartan.className}`}>
         <NavBar props={props}></NavBar>
         <DesktopContainer>
           <ImgContainer>

@@ -4,7 +4,6 @@ import { Para } from "./StyledParagraph/Styled.para";
 import { Title } from "@/components/Navigation/Heading/Styled.heading";
 import { CtaContainer } from "../CTA/Styled.CtaContainer";
 import Link from "next/link";
-import { useRouter } from "next/router";
 
 export const ArticleContainer = styled.div`
   padding: 0 24px 28px;
@@ -54,6 +53,9 @@ const InfoDiv = styled.div`
 `;
 const BtnContainer = styled.div`
   display: none;
+  a {
+    text-decoration: none;
+  }
   @media (min-width: 768px) {
     display: flex;
     flex-direction: column;

@@ -8,6 +8,9 @@ export const DivLinks = styled.div<{ color: Tcolor; isActive: boolean }>`
   border-color: ${(props) =>
     props.isActive ? props.theme.colors[props.color] : ""};
   padding: 20px 0;
+  a {
+    text-decoration: none;
+  }
 `;
 
 export default function MobileMenu({ props }: any) {

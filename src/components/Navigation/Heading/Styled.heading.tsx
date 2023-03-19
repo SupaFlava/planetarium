@@ -4,10 +4,11 @@ export const Title = styled.h1`
   color: ${(props) => props.theme.colors.txtColor};
   font-family: ${(props) => props.theme.fonts.headingFont};
 
-  font-weight: 500;
-  font-size: 28px;
-  letter-spacing: -1.05px;
+  font-weight: 400;
+  font-size: 40px;
+  /* letter-spacing: -1.05px; */
   line-height: 100%;
+  vertical-align: top;
   /* margin-bottom: 16px; */
   text-transform: uppercase;
 `;

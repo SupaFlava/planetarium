@@ -10,13 +10,20 @@ const CtaDiv = styled.div`
   opacity: 50%;
   display: flex;
   justify-content: space-between;
+  img {
+    width: 12px;
+    height: 12px;
+    align-self: center;
+  }
 `;
 const SourceTxt = styled.span`
   display: inline;
   font-size: 12px;
+  font-weight: 100;
+  letter-spacing: 0.5px;
+
   line-height: 25px;
   font-family: ${(props) => props.theme.fonts.textFont};
-  font-weight: 400;
   color: ${(props) => props.theme.colors.txtColor};
 `;
 const CtaTxt = styled.a`
@@ -27,8 +34,9 @@ const CtaTxt = styled.a`
 export const CtaContainer = () => {
   return (
     <CtaDiv>
-      <SourceTxt>Source:</SourceTxt>
+      <SourceTxt>Source :</SourceTxt>
       <CtaTxt>Wikipedia</CtaTxt>
+      <img src="/assets/icon-source.svg" />{" "}
     </CtaDiv>
   );
 };
