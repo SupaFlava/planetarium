@@ -110,7 +110,7 @@ export const MainSection = ({
   content,
   source,
   subpage,
-}) => {
+}: any) => {
   return (
     <ArticleContainer>
       <InfoDiv>

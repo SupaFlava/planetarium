@@ -52,14 +52,17 @@ const ActiveContainer = styled.div`
   }
 `;
 
-export default function MobileMenuActive({ open, planets }: any) {
+export default function MobileMenuActive({ open, props }: any) {
   return (
     <MenuActive open={open}>
-      {planets.map((planet: any) => (
+      {props.planets.map((planet: any) => (
         <ActiveContainer key={planet.id}>
           <SeperationDiv>
             <Cirlce color={planet.slug} />
-            <Link style={{ textDecoration: "none" }} href={planet.slug}>
+            <Link
+              style={{ textDecoration: "none" }}
+              href={`/planets/${planet.slug}`}
+            >
               <h3>{planet.name}</h3>
             </Link>
           </SeperationDiv>

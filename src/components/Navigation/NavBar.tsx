@@ -18,7 +18,7 @@ export const NavBar = ({ props }: any) => {
         <StyledHeader>
           <Title className={antonio.className}>THE PLANETS</Title>
           <Burger open={open} setOpen={setOpen} />
-          <MobileMenuActive open={open} planets={planets} />
+          <MobileMenuActive open={open} props={props} />
           <Menu className={spartan.className} props={props} />
         </StyledHeader>
       </StyledNavContainer>
