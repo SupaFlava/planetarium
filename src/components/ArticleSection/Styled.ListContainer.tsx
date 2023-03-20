@@ -57,8 +57,8 @@ export const TxtHeading = styled.h2`
   color: ${(props) => props.theme.colors.txtColor};
   text-transform: uppercase;
 `;
-export default function List({ fields }: any) {
-  const { rotation, revolution, radius, temperature, slug } = fields;
+export default function List({ props }: any) {
+  const { rotation, revolution, radius, temperature } = props.singlePlanet;
 
   return (
     <>

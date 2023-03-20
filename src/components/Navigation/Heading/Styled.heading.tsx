@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const Title = styled.h1`
   color: ${(props) => props.theme.colors.txtColor};
-  font-family: ${(props) => props.theme.fonts.headingFont};
 
   font-weight: 400;
   font-size: 40px;

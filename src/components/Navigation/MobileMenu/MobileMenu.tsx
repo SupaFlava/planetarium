@@ -14,22 +14,21 @@ export const DivLinks = styled.div<{ color: Tcolor; isActive: boolean }>`
 `;
 
 export default function MobileMenu({ props }: any) {
-  const { fields, subpage } = props;
-  console.log(fields);
+  const { slug, subpage } = props;
   return (
     <StyledMobileMenu>
-      <DivLinks color={fields.slug} isActive={!subpage}>
-        <Link href={`/planets/${fields.slug}`}>
+      <DivLinks color={slug} isActive={!subpage}>
+        <Link href={`/planets/${slug}`}>
           <span>OVERVIEW</span>
         </Link>
       </DivLinks>
-      <DivLinks color={fields.slug} isActive={subpage === "surface"}>
-        <Link href={`/planets/${fields.slug}/surface`}>
+      <DivLinks color={slug} isActive={subpage === "surface"}>
+        <Link href={`/planets/${slug}/surface`}>
           <span>STRUCTURE</span>
         </Link>
       </DivLinks>
-      <DivLinks color={fields.slug} isActive={subpage === "geology"}>
-        <Link href={`/planets/${fields.slug}/geology`}>
+      <DivLinks color={slug} isActive={subpage === "geology"}>
+        <Link href={`/planets/${slug}/geology`}>
           <span>SURFACE</span>
         </Link>
       </DivLinks>

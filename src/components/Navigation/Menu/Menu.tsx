@@ -17,19 +17,13 @@ export const AncherDiv = styled.div<{ color: Tcolor }>`
 const Menu = ({ props }: any) => {
   const { planets, singlePlanet } = props;
 
-  const { slug } = singlePlanet[0].fields;
-
-  console.log(singlePlanet);
   return (
     <>
       <StyledMenu>
         {planets.map((planet: any) => (
-          <AncherDiv
-            color={planet.fields.name.toLowerCase()}
-            key={planet.sys.id}
-          >
-            <Link href={`/planets/${planet.fields.slug}`}>
-              <span>{planet.fields.name}</span>
+          <AncherDiv color={planet.slug} key={planet.id}>
+            <Link href={`/planets/${planet.slug}`}>
+              <span>{planet.name}</span>
             </Link>
           </AncherDiv>
         ))}

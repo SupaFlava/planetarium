@@ -4,6 +4,9 @@ export const StyledHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  h1 {
+    font-size: 26px;
+  }
 
   @media (min-width: 768px) {
     justify-content: center;

@@ -18,14 +18,12 @@ import PlanetPage from "@/components/PlanetPage";
 
 export default function HomePlanet(props: any) {
   const { planets, singlePlanet, imgUrl, content, source } = props;
-  const { fields } = singlePlanet[0];
 
   return (
     <PlanetPage
       content={content}
       source={source}
       imgUrl={imgUrl}
-      fields={fields}
       planets={planets}
       singlePlanet={singlePlanet}
     />
@@ -34,7 +32,7 @@ export default function HomePlanet(props: any) {
 export const getStaticPaths: GetStaticPaths = async () => {
   const planets = await getPlanets();
   const paths = planets.flatMap((planet: any) => [
-    { params: { planet: planet.fields.name.toLowerCase() } },
+    { params: { planet: planet.name.toLowerCase() } },
   ]);
 
   return {
@@ -48,20 +46,37 @@ export const getStaticProps: GetStaticProps<{}> = async ({ params }) => {
   const planetName = params;
 
   const singlePlanet = await getPlanetByName(planetName?.planet);
-  let imgUrl = singlePlanet[0].fields.images[0].fields.file.url;
-  let content;
-  let source;
-  content = singlePlanet[0].fields.content;
-  source = singlePlanet[0].fields.overviewSource;
-  imgUrl = singlePlanet[0].fields.images[0].fields.file.url;
+  let name = singlePlanet?.name;
+  console.log(singlePlanet?.name);
+  let imgUrl = singlePlanet?.images[0].fields.file.url;
+  let content = singlePlanet?.content;
+  let source = singlePlanet?.overviewSource;
+  let temperature = singlePlanet?.temperature;
+  let rotation = singlePlanet?.rotation;
+  let radius = singlePlanet?.radius;
+  let revolution = singlePlanet?.revolution;
+  // singlePlanet?.map((single) => {
+  //   imgUrl = single.images[0];
+  //   content = single.content;
+  //   source = single.overviewSource;
+  // });
+
+  // content = singlePlanet[0].fields.content;
+  // source = singlePlanet[0].fields.overviewSource;
+  // imgUrl = singlePlanet[0].fields.images[0].fields.file.url;
 
   return {
     props: {
-      planets: planets,
-      singlePlanet: singlePlanet,
+      planets,
+      singlePlanet,
       content,
       source,
       imgUrl,
+      radius,
+      revolution,
+      rotation,
+      temperature,
+      name,
     },
   };
 };

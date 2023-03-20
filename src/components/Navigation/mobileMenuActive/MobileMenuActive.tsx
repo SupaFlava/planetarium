@@ -56,11 +56,11 @@ export default function MobileMenuActive({ open, planets }: any) {
   return (
     <MenuActive open={open}>
       {planets.map((planet: any) => (
-        <ActiveContainer key={planet.sys.id}>
+        <ActiveContainer key={planet.id}>
           <SeperationDiv>
-            <Cirlce color={planet.fields.slug} />
-            <Link style={{ textDecoration: "none" }} href={planet.fields.slug}>
-              <h3>{planet.fields.name}</h3>
+            <Cirlce color={planet.slug} />
+            <Link style={{ textDecoration: "none" }} href={planet.slug}>
+              <h3>{planet.name}</h3>
             </Link>
           </SeperationDiv>
           <img src="/assets/icon-chevron.svg" />

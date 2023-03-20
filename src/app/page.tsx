@@ -16,24 +16,7 @@ import { GetStaticProps } from "next";
 import { PlanetInterface } from "@/types/PlanetInterface";
 import { getPlanets } from "apiClient/planetsApi";
 import HomePlanet from "@/pages/planets/[planet]";
-// ("use client");
-// const Context = createContext(GlobalStyles);
 
 export default function Home(props: any) {
-  // const data = await getPlanets();
-  // console.log(data);
-  return (
-    <ThemeProvider theme={theme}>
-      <HomePlanet />
-    </ThemeProvider>
-  );
+  return <ThemeProvider theme={theme}>{/* <HomePlanet /> */}</ThemeProvider>;
 }
-// export const getStaticProps: GetStaticProps<{
-//   objectData: PlanetInterface;
-// }> = async (context) => {
-//   const objectData: PlanetInterface = await getPlanets();
-//   return {
-//     props: { objectData },
-//   };
-//   // will be passed to the page component as props
-// };

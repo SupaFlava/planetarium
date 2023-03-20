@@ -1,7 +1,9 @@
 import styled from "styled-components";
 
 export const LandingStrip = styled.div`
-  @media (max-width: 768px) {
+  border: 0;
+  margin: 0;
+  @media (max-width: 520px) {
     margin: auto;
   }
 `;

@@ -20,8 +20,6 @@ declare module "styled-components" {
       textFont: string;
     };
   }
-  logo: {
-    src: string;
-  }
+
   export type Tcolor = keyof DefaultTheme["colors"];
 }

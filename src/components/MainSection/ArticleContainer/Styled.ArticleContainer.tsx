@@ -4,6 +4,7 @@ import { Para } from "./StyledParagraph/Styled.para";
 import { Title } from "@/components/Navigation/Heading/Styled.heading";
 import { CtaContainer } from "../CTA/Styled.CtaContainer";
 import Link from "next/link";
+import { antonio } from "@/utils/fonts";
 
 export const ArticleContainer = styled.div`
   padding: 0 24px 28px;
@@ -102,31 +103,38 @@ const Button = styled.button<{ color: Tcolor; isActive: boolean }>`
   }
 `;
 
-export const MainSection = ({ slug, name, content, source, subpage }: any) => {
+export const MainSection = ({
+  singlePlanet,
+  slug,
+  name,
+  content,
+  source,
+  subpage,
+}) => {
   return (
     <ArticleContainer>
       <InfoDiv>
-        <Title>{name}</Title>
+        <Title className={antonio.className}>{singlePlanet.name}</Title>
 
         <Para>{content}</Para>
         <CtaContainer />
       </InfoDiv>
       <BtnContainer>
-        <Link href={`/planets/${slug}`}>
+        <Link href={`/planets/${singlePlanet.slug}`}>
           {subpage === "geology"}
-          <Button isActive={!subpage} color={slug}>
+          <Button isActive={!subpage} color={singlePlanet.slug}>
             <span>01</span>
             <h3>Overview</h3>
           </Button>
         </Link>
-        <Link href={`/planets/${slug}/surface`}>
-          <Button isActive={subpage === "surface"} color={slug}>
+        <Link href={`/planets/${singlePlanet.slug}/surface`}>
+          <Button isActive={subpage === "surface"} color={singlePlanet.slug}>
             <span>02</span>
             <h3>Internal Structure</h3>
           </Button>
         </Link>
-        <Link href={`/planets/${slug}/geology`}>
-          <Button isActive={subpage === "geology"} color={slug}>
+        <Link href={`/planets/${singlePlanet.slug}/geology`}>
+          <Button isActive={subpage === "geology"} color={singlePlanet.slug}>
             <span>03</span>
             <h3>Surface Geology</h3>
           </Button>
