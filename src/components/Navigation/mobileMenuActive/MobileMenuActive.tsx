@@ -1,3 +1,4 @@
+import { IPlanetFields } from "contentful/__generated__/types";
 import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
@@ -55,10 +56,11 @@ const ActiveContainer = styled.div`
 export default function MobileMenuActive({ open, props }: any) {
   return (
     <MenuActive open={open}>
-      {props.planets.map((planet: any) => (
-        <ActiveContainer key={planet.id}>
+      {props.planets.map((planet: IPlanetFields) => (
+        <ActiveContainer key={planet.name}>
           <SeperationDiv>
             <Cirlce color={planet.slug} />
+
             <Link
               style={{ textDecoration: "none" }}
               href={`/planets/${planet.slug}`}

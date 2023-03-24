@@ -1,7 +1,7 @@
 import { createClient, Entry } from "contentful";
 import { IPlanet, IPlanetFields } from "contentful/__generated__/types";
 
-export async function getPlanets(): Promise<IPlanetFields[]> {
+export async function getPlanets(): Promise<IPlanet[]> {
   const client = createClient({
     space: process.env.CONTENTFUL_SPACE_ID,
     accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
@@ -10,18 +10,32 @@ export async function getPlanets(): Promise<IPlanetFields[]> {
     content_type: "planet",
   });
 
-  const items = response.items;
+  const planets: IPlanet[] = response.items.map((item) => {
+    return {
+      ...item,
+      sys: {
+        ...item.sys,
+        contentType: {
+          sys: {
+            id: "planet",
+            linkType: "ContentType",
+            type: "Link",
+          },
+        },
+      },
+    };
+  });
 
-  const planets: IPlanetFields[] = items.map((item) => item.fields);
+  // const planets: IPlanetFields[] = items.map((item) => item.fields);
 
   return planets;
 }
 
-export async function getPlanetByName(name: any) {
-  const planets: IPlanetFields[] = await getPlanets();
+export async function getPlanetByName(name: string) {
+  const planets = await getPlanets();
 
   const result = planets.find(
-    (planet: any) => planet.name.toLowerCase() === name.toLowerCase()
+    (planet) => planet.fields.name.toLowerCase() === name.toLowerCase()
   );
 
   return result;

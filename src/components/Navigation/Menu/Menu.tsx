@@ -2,6 +2,7 @@ import React from "react";
 import { StyledMenu } from "./Styled.Menu";
 import Link from "next/link";
 import styled, { Tcolor } from "styled-components";
+import { IPlanetFields } from "contentful/__generated__/types";
 
 export const AncherDiv = styled.div<{ color: Tcolor }>`
   @media (min-width: 1440px) {
@@ -20,8 +21,8 @@ const Menu = ({ props }: any) => {
   return (
     <>
       <StyledMenu>
-        {planets.map((planet: any) => (
-          <AncherDiv color={planet.slug} key={planet.id}>
+        {planets.map((planet: IPlanetFields) => (
+          <AncherDiv color={planet.slug} key={planet.name}>
             <Link href={`/planets/${planet.slug}`}>
               <span>{planet.name}</span>
             </Link>

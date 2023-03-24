@@ -15,8 +15,21 @@ import { PlanetInterface } from "@/types/PlanetInterface";
 import { getPlanetByName, getPlanets } from "apiClient/planetsApi";
 import { Router, useRouter } from "next/router";
 import PlanetPage from "@/components/PlanetPage";
+import { InferGetStaticPropsType } from "next";
+import { IPlanet, IPlanetFields } from "contentful/__generated__/types";
+import { ParsedUrlQuery } from "querystring";
 
-export default function HomePlanet(props: any) {
+interface IHomeProps {
+  planets: IPlanet[];
+  singlePlanet?: IPlanet;
+  content?: string;
+  source?: string;
+  imgUrl?: string;
+}
+
+export default function HomePlanet(
+  props: InferGetStaticPropsType<typeof getStaticProps>
+) {
   const { planets, singlePlanet, imgUrl, content, source } = props;
 
   return (
@@ -29,10 +42,23 @@ export default function HomePlanet(props: any) {
     />
   );
 }
+interface Params extends ParsedUrlQuery {
+  planet:
+    | "mercury"
+    | "earth"
+    | "mars"
+    | "venus"
+    | "uranus"
+    | "neptune"
+    | "saturn"
+    | "jupiter";
+}
+type slug = IPlanetFields["slug"];
+
 export const getStaticPaths: GetStaticPaths = async () => {
   const planets = await getPlanets();
-  const paths = planets.flatMap((planet: any) => [
-    { params: { planet: planet.name.toLowerCase() } },
+  const paths = planets.flatMap((planet) => [
+    { params: { planet: planet.fields.slug } },
   ]);
 
   return {
@@ -41,20 +67,31 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps<{}> = async ({ params }) => {
+export const getStaticProps: GetStaticProps<IHomeProps> = async ({
+  params,
+}) => {
   const planets = await getPlanets();
-  const planetName = params;
+  const planetName = params?.planet;
 
-  const singlePlanet = await getPlanetByName(planetName?.planet);
-  let name = singlePlanet?.name;
-  console.log(singlePlanet?.name);
-  let imgUrl = singlePlanet?.images[0].fields.file.url;
-  let content = singlePlanet?.content;
-  let source = singlePlanet?.overviewSource;
-  let temperature = singlePlanet?.temperature;
-  let rotation = singlePlanet?.rotation;
-  let radius = singlePlanet?.radius;
-  let revolution = singlePlanet?.revolution;
+  // function parsUrlQuery(urlQuery: string | string[] | undefined): string {
+  //   if (urlQuery === undefined) {
+  //     return "";
+  //   }
+  //   if (Array.isArray(urlQuery)) {
+  //     return urlQuery.join("");
+  //   }
+  //   return urlQuery;
+  // }
+
+  // const singlePlanet = await getPlanetByName(planetName?.planet);
+  const singlePlanet = planets.find(
+    (planet) => planet.fields.slug === planetName
+  );
+  let name = singlePlanet?.fields.name;
+  let imgUrl = singlePlanet?.fields.images[0].fields.file.url;
+  let content = singlePlanet?.fields.content;
+  let source = singlePlanet?.fields.overviewSource;
+
   // singlePlanet?.map((single) => {
   //   imgUrl = single.images[0];
   //   content = single.content;
@@ -72,11 +109,6 @@ export const getStaticProps: GetStaticProps<{}> = async ({ params }) => {
       content,
       source,
       imgUrl,
-      radius,
-      revolution,
-      rotation,
-      temperature,
-      name,
     },
   };
 };

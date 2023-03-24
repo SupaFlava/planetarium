@@ -22,12 +22,12 @@ export default function Subpage(props: any) {
 }
 export const getStaticPaths: GetStaticPaths = async () => {
   const planets = await getPlanets();
-  const paths = planets.flatMap((planet: any) => [
+  const paths = planets.flatMap((planet) => [
     {
-      params: { planet: planet.name.toLowerCase(), subpage: "geology" },
+      params: { planet: planet.fields.slug, subpage: "geology" },
     },
     {
-      params: { planet: planet.name.toLowerCase(), subpage: "surface" },
+      params: { planet: planet.fields.slug, subpage: "surface" },
     },
   ]);
 
@@ -43,20 +43,20 @@ export const getStaticProps: GetStaticProps<{}> = async ({ params }) => {
 
   const singlePlanet = await getPlanetByName(planetName?.planet);
 
-  let imgUrl = singlePlanet?.images[0].fields.file.url;
+  let imgUrl = singlePlanet?.fields.images[0].fields.file.url;
 
   // let imgUrl = singlePlanet[0].fields.images[0].fields.file.url;
   let geoImg = null;
   let content;
   let source;
   if (params?.subpage === "surface") {
-    content = singlePlanet?.structureContent;
-    source = singlePlanet?.structureSource;
-    imgUrl = singlePlanet?.images[1].fields.file.url;
+    content = singlePlanet?.fields.structureContent;
+    source = singlePlanet?.fields.structureSource;
+    imgUrl = singlePlanet?.fields.images[1].fields.file.url;
   } else if (params?.subpage === "geology") {
-    content = singlePlanet?.geologyContent;
-    source = singlePlanet?.geologySource;
-    geoImg = singlePlanet?.images[2].fields.file.url;
+    content = singlePlanet?.fields.geologyContent;
+    source = singlePlanet?.fields.geologySource;
+    geoImg = singlePlanet?.fields.images[2].fields.file.url;
   }
 
   return {

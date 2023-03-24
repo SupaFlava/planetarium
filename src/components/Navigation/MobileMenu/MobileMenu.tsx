@@ -14,8 +14,7 @@ export const DivLinks = styled.div<{ color: Tcolor; isActive: boolean }>`
 `;
 
 export default function MobileMenu({ props }: any) {
-  const { slug, subpage, singlePlanet } = props;
-  console.log(singlePlanet);
+  const { subpage, singlePlanet } = props;
   return (
     <StyledMobileMenu>
       <DivLinks color={singlePlanet.slug} isActive={!subpage}>
