@@ -7,24 +7,33 @@ import { ParsedUrlQuery } from "querystring";
 
 interface ISubpageProps {
   planets: IPlanet[];
-  singlePlanet?: IPlanet;
-  content?: string;
-  source?: string;
-  imgUrl?: string;
+  singlePlanet: IPlanet;
+  content: string;
+  source: string;
+  imgUrl: string;
 }
 interface IPlanetPageProps extends ISubpageProps {
-  geoImg?: string;
-  subpage?: string;
-  name?: string;
-  slug?: IPlanetFields["slug"];
+  geoImg: string;
+  subpage: string;
+  name: string;
+  slug: IPlanetFields["slug"];
 }
 
 export default function Subpage(props: IPlanetPageProps) {
-  const { planets, singlePlanet, imgUrl, geoImg, content, source, subpage } =
-    props;
+  const {
+    planets,
+    singlePlanet,
+    imgUrl,
+    geoImg,
+    content,
+    source,
+    subpage,
+    slug,
+  } = props;
 
   return (
     <PlanetPage
+      slug={slug}
       subpage={subpage}
       content={content}
       source={source}
@@ -85,23 +94,30 @@ export const getStaticProps: GetStaticProps<{}> = async ({ params }) => {
       notFound: true,
     };
   }
+
   const singlePlanet = planets.find(
     (planet) => planet.fields.slug === planetName
   );
+  if (!singlePlanet) {
+    return {
+      notFound: true,
+    };
+  }
   let imgUrl = singlePlanet?.fields.images[0].fields.file.url;
 
   // let imgUrl = singlePlanet[0].fields.images[0].fields.file.url;
   let geoImg = null;
   let content;
   let source;
+  const slug = singlePlanet.fields.slug;
   if (params?.subpage === "surface") {
-    content = singlePlanet?.fields.structureContent;
-    source = singlePlanet?.fields.structureSource;
-    imgUrl = singlePlanet?.fields.images[1].fields.file.url;
+    content = singlePlanet.fields.structureContent;
+    source = singlePlanet.fields.structureSource;
+    imgUrl = singlePlanet.fields.images[1].fields.file.url;
   } else if (params?.subpage === "geology") {
-    content = singlePlanet?.fields.geologyContent;
-    source = singlePlanet?.fields.geologySource;
-    geoImg = singlePlanet?.fields.images[2].fields.file.url;
+    content = singlePlanet.fields.geologyContent;
+    source = singlePlanet.fields.geologySource;
+    geoImg = singlePlanet.fields.images[2].fields.file.url;
   }
 
   return {
@@ -112,6 +128,7 @@ export const getStaticProps: GetStaticProps<{}> = async ({ params }) => {
       geoImg: geoImg,
       content,
       source,
+      slug,
       subpage: params?.subpage,
     },
   };

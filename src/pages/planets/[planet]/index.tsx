@@ -41,8 +41,6 @@ export default function HomePlanet({
   source,
   slug,
 }: IHomeProps) {
-  console.log("index", slug);
-
   return (
     <PlanetPage
       content={content}
