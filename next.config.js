@@ -3,6 +3,15 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
+  async redirects() {
+    return [
+      {
+        source: "/",
+        destination: "/planets/earth",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;

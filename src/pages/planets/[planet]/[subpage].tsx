@@ -1,10 +1,25 @@
 import React from "react";
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import { getPlanetByName, getPlanets } from "apiClient/planetsApi";
-
+import { IPlanet, IPlanetFields } from "contentful/__generated__/types";
 import PlanetPage from "@/components/PlanetPage";
+import { ParsedUrlQuery } from "querystring";
 
-export default function Subpage(props: any) {
+interface ISubpageProps {
+  planets: IPlanet[];
+  singlePlanet?: IPlanet;
+  content?: string;
+  source?: string;
+  imgUrl?: string;
+}
+interface IPlanetPageProps extends ISubpageProps {
+  geoImg?: string;
+  subpage?: string;
+  name?: string;
+  slug?: IPlanetFields["slug"];
+}
+
+export default function Subpage(props: IPlanetPageProps) {
   const { planets, singlePlanet, imgUrl, geoImg, content, source, subpage } =
     props;
 
@@ -19,6 +34,17 @@ export default function Subpage(props: any) {
       singlePlanet={singlePlanet}
     />
   );
+}
+interface Params extends ParsedUrlQuery {
+  planet:
+    | "mercury"
+    | "earth"
+    | "mars"
+    | "venus"
+    | "uranus"
+    | "neptune"
+    | "saturn"
+    | "jupiter";
 }
 export const getStaticPaths: GetStaticPaths = async () => {
   const planets = await getPlanets();
@@ -36,13 +62,32 @@ export const getStaticPaths: GetStaticPaths = async () => {
     fallback: false,
   };
 };
+function isPlanetName(name: string): name is slug {
+  return [
+    "mercury",
+    "earth",
+    "mars",
+    "venus",
+    "uranus",
+    "neptune",
+    "saturn",
+    "jupiter",
+  ].includes(name);
+}
+type slug = IPlanetFields["slug"];
 
 export const getStaticProps: GetStaticProps<{}> = async ({ params }) => {
   const planets = await getPlanets();
-  const planetName = params;
+  const planetName = params?.planet as Params["planet"];
 
-  const singlePlanet = await getPlanetByName(planetName?.planet);
-
+  if (!isPlanetName(planetName)) {
+    return {
+      notFound: true,
+    };
+  }
+  const singlePlanet = planets.find(
+    (planet) => planet.fields.slug === planetName
+  );
   let imgUrl = singlePlanet?.fields.images[0].fields.file.url;
 
   // let imgUrl = singlePlanet[0].fields.images[0].fields.file.url;

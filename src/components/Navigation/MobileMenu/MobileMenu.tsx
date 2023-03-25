@@ -1,3 +1,4 @@
+import { IPlanet, IPlanetFields } from "contentful/__generated__/types";
 import Link from "next/link";
 import React from "react";
 import styled, { Tcolor } from "styled-components";
@@ -13,22 +14,26 @@ export const DivLinks = styled.div<{ color: Tcolor; isActive: boolean }>`
   }
 `;
 
-export default function MobileMenu({ props }: any) {
-  const { subpage, singlePlanet } = props;
+interface ImobileMenuProps {
+  subpage?: string;
+  slug: IPlanetFields["slug"];
+}
+
+export default function MobileMenu({ subpage, slug }: ImobileMenuProps) {
   return (
     <StyledMobileMenu>
-      <DivLinks color={singlePlanet.slug} isActive={!subpage}>
-        <Link href={`/planets/${singlePlanet.slug}`}>
+      <DivLinks color={slug} isActive={!subpage}>
+        <Link href={`/planets/${slug}`}>
           <span>OVERVIEW</span>
         </Link>
       </DivLinks>
-      <DivLinks color={singlePlanet.slug} isActive={subpage === "surface"}>
-        <Link href={`/planets/${singlePlanet.slug}/surface`}>
+      <DivLinks color={slug} isActive={subpage === "surface"}>
+        <Link href={`/planets/${slug}/surface`}>
           <span>STRUCTURE</span>
         </Link>
       </DivLinks>
-      <DivLinks color={singlePlanet.slug} isActive={subpage === "geology"}>
-        <Link href={`/planets/${singlePlanet.slug}/geology`}>
+      <DivLinks color={slug} isActive={subpage === "geology"}>
+        <Link href={`/planets/${slug}/geology`}>
           <span>SURFACE</span>
         </Link>
       </DivLinks>

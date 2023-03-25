@@ -7,9 +7,20 @@ import { StyledNavContainer } from "./NavContainer/Styled.navContainer";
 import { Title } from "./Heading/Styled.heading";
 import MobileMenuActive from "./mobileMenuActive/MobileMenuActive";
 import { antonio, spartan } from "../../utils/fonts";
+import { IPlanet, IPlanetFields } from "contentful/__generated__/types";
 
-export const NavBar = ({ props }: any) => {
-  const { planets, singlePlanet, subpage } = props;
+interface INavBarProps {
+  planets: IPlanet[];
+  singlePlanet?: IPlanet;
+  subPage?: string;
+  slug: IPlanetFields["slug"];
+}
+export const NavBar = ({
+  planets,
+  singlePlanet,
+  subPage,
+  slug,
+}: INavBarProps) => {
   const [open, setOpen] = useState<boolean>(false);
   const close = () => setOpen(false);
   return (
@@ -18,11 +29,11 @@ export const NavBar = ({ props }: any) => {
         <StyledHeader>
           <Title className={antonio.className}>THE PLANETS</Title>
           <Burger open={open} setOpen={setOpen} />
-          <MobileMenuActive open={open} props={props} />
-          <Menu className={spartan.className} props={props} />
+          <MobileMenuActive open={open} planets={planets} />
+          <Menu className={spartan.className} planets={planets} />
         </StyledHeader>
       </StyledNavContainer>
-      <MobileMenu props={props} />
+      <MobileMenu slug={slug} subpage={subPage} />
     </>
   );
 };

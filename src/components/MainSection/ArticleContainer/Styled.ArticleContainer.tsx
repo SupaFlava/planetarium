@@ -5,6 +5,7 @@ import { Title } from "@/components/Navigation/Heading/Styled.heading";
 import { CtaContainer } from "../CTA/Styled.CtaContainer";
 import Link from "next/link";
 import { antonio } from "@/utils/fonts";
+import { IPlanet, IPlanetFields } from "contentful/__generated__/types";
 
 export const ArticleContainer = styled.div`
   padding: 0 24px 28px;
@@ -102,39 +103,51 @@ const Button = styled.button<{ color: Tcolor; isActive: boolean }>`
     font-size: 12px;
   }
 `;
+interface ImainSectionProps {
+  singlePlanet: IPlanet;
+  slug: IPlanetFields["slug"];
+  content: string;
+  source: string;
+  subpage?: string;
+}
 
 export const MainSection = ({
   singlePlanet,
   slug,
-  name,
   content,
   source,
   subpage,
-}: any) => {
+}: ImainSectionProps) => {
   return (
     <ArticleContainer>
       <InfoDiv>
-        <Title className={antonio.className}>{singlePlanet.name}</Title>
+        <Title className={antonio.className}>{singlePlanet.fields.slug}</Title>
 
         <Para>{content}</Para>
         <CtaContainer />
       </InfoDiv>
       <BtnContainer>
-        <Link href={`/planets/${singlePlanet.slug}`}>
+        <Link href={`/planets/${singlePlanet.fields.slug}`}>
           {subpage === "geology"}
-          <Button isActive={!subpage} color={singlePlanet.slug}>
+          <Button isActive={!subpage} color={singlePlanet.fields.slug}>
             <span>01</span>
             <h3>Overview</h3>
           </Button>
         </Link>
-        <Link href={`/planets/${singlePlanet.slug}/surface`}>
-          <Button isActive={subpage === "surface"} color={singlePlanet.slug}>
+        <Link href={`/planets/${singlePlanet.fields.slug}/surface`}>
+          <Button
+            isActive={subpage === "surface"}
+            color={singlePlanet.fields.slug}
+          >
             <span>02</span>
             <h3>Internal Structure</h3>
           </Button>
         </Link>
-        <Link href={`/planets/${singlePlanet.slug}/geology`}>
-          <Button isActive={subpage === "geology"} color={singlePlanet.slug}>
+        <Link href={`/planets/${singlePlanet.fields.slug}/geology`}>
+          <Button
+            isActive={subpage === "geology"}
+            color={singlePlanet.fields.slug}
+          >
             <span>03</span>
             <h3>Surface Geology</h3>
           </Button>

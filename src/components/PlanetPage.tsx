@@ -10,8 +10,20 @@ import { MainSection } from "@/components/MainSection/ArticleContainer/Styled.Ar
 import List from "@/components/ArticleSection/Styled.ListContainer";
 import { DesktopContainer } from "@/components/Responsive/Styled.desktopContainer";
 import { GeologyImg } from "./MainSection/img/Style.GeologyImg";
+import { IPlanet, IPlanetFields } from "contentful/__generated__/types";
 
-export default function PlanetPage(props: any) {
+interface IPlanetPageProps {
+  planets: IPlanet[];
+  singlePlanet: IPlanet;
+  content: string;
+  source: string;
+  imgUrl: string;
+  geoImg?: string;
+  subpage?: string;
+  slug: IPlanetFields["slug"];
+}
+
+export default function PlanetPage(props: IPlanetPageProps) {
   const {
     planets,
     singlePlanet,
@@ -20,8 +32,6 @@ export default function PlanetPage(props: any) {
     imgUrl,
     geoImg,
     subpage,
-    fields,
-    name,
     slug,
   } = props;
   return (
@@ -30,7 +40,12 @@ export default function PlanetPage(props: any) {
       {true}
 
       <LandingStrip>
-        <NavBar props={props}></NavBar>
+        <NavBar
+          subPage={subpage}
+          singlePlanet={singlePlanet}
+          planets={planets}
+          slug={slug}
+        ></NavBar>
         <DesktopContainer>
           <ImgContainer>
             <CoverImg src={"https:" + imgUrl} />
@@ -40,13 +55,12 @@ export default function PlanetPage(props: any) {
             subpage={subpage}
             content={content}
             source={source}
-            name={name}
             slug={slug}
             singlePlanet={singlePlanet}
           ></MainSection>
         </DesktopContainer>
         <FactsContainer>
-          <List props={props}></List>
+          <List singlePlanet={singlePlanet}></List>
         </FactsContainer>
       </LandingStrip>
     </ThemeProvider>

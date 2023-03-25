@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import react from "react";
+import { IPlanet } from "contentful/__generated__/types";
 
 export const ListContainer = styled.div`
   border: 1px solid rgba(255, 255, 255, 0.5);
@@ -57,8 +58,8 @@ export const TxtHeading = styled.h2`
   color: ${(props) => props.theme.colors.txtColor};
   text-transform: uppercase;
 `;
-export default function List({ props }: any) {
-  const { rotation, revolution, radius, temperature } = props.singlePlanet;
+export default function List({ singlePlanet }: { singlePlanet: IPlanet }) {
+  const { rotation, revolution, radius, temperature } = singlePlanet.fields;
 
   return (
     <>

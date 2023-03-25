@@ -1,4 +1,4 @@
-import { IPlanetFields } from "contentful/__generated__/types";
+import { IPlanet, IPlanetFields } from "contentful/__generated__/types";
 import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
@@ -18,6 +18,8 @@ const MenuActive = styled.div<{ open: boolean }>`
   color: ${(props) => props.theme.colors.txtColor};
   transform: ${({ open }) => (open ? "translateX(0)" : "translateX(-100%)")};
   transition: all 0.5s ease-in-out;
+  height: 200vh;
+  gap: 25px;
 
   display: ${({ open }) => (open ? "flex" : "none")};
 
@@ -38,7 +40,6 @@ const ActiveContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
   padding: 0 24px;
   :not(:last-child) {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -53,19 +54,25 @@ const ActiveContainer = styled.div`
   }
 `;
 
-export default function MobileMenuActive({ open, props }: any) {
+export default function MobileMenuActive({
+  open,
+  planets,
+}: {
+  planets: IPlanet[];
+  open: boolean;
+}) {
   return (
     <MenuActive open={open}>
-      {props.planets.map((planet: IPlanetFields) => (
-        <ActiveContainer key={planet.name}>
+      {planets.map((planet) => (
+        <ActiveContainer key={planet.fields.slug}>
           <SeperationDiv>
-            <Cirlce color={planet.slug} />
+            <Cirlce color={planet.fields.slug} />
 
             <Link
               style={{ textDecoration: "none" }}
-              href={`/planets/${planet.slug}`}
+              href={`/planets/${planet.fields.slug}`}
             >
-              <h3>{planet.name}</h3>
+              <h3>{planet.fields.name}</h3>
             </Link>
           </SeperationDiv>
           <img src="/assets/icon-chevron.svg" />

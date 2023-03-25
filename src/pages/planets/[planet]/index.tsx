@@ -21,16 +21,27 @@ import { ParsedUrlQuery } from "querystring";
 
 interface IHomeProps {
   planets: IPlanet[];
-  singlePlanet?: IPlanet;
-  content?: string;
-  source?: string;
-  imgUrl?: string;
+  singlePlanet: IPlanet;
+  content: string;
+  source: string;
+  imgUrl: string;
+  slug: IPlanetFields["slug"];
+}
+interface IPlanetPageProps extends IHomeProps {
+  geoImg: string;
+  subpage: string;
+  name: string;
 }
 
-export default function HomePlanet(
-  props: InferGetStaticPropsType<typeof getStaticProps>
-) {
-  const { planets, singlePlanet, imgUrl, content, source } = props;
+export default function HomePlanet({
+  planets,
+  singlePlanet,
+  imgUrl,
+  content,
+  source,
+  slug,
+}: IHomeProps) {
+  console.log("index", slug);
 
   return (
     <PlanetPage
@@ -39,6 +50,7 @@ export default function HomePlanet(
       imgUrl={imgUrl}
       planets={planets}
       singlePlanet={singlePlanet}
+      slug={slug}
     />
   );
 }
@@ -67,12 +79,38 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
+function isPlanetName(name: string): name is slug {
+  return [
+    "mercury",
+    "earth",
+    "mars",
+    "venus",
+    "uranus",
+    "neptune",
+    "saturn",
+    "jupiter",
+  ].includes(name);
+}
+
 export const getStaticProps: GetStaticProps<IHomeProps> = async ({
   params,
 }) => {
   const planets = await getPlanets();
-  const planetName = params?.planet;
+  const planetName = params?.planet as Params["planet"];
 
+  if (!isPlanetName(planetName)) {
+    return {
+      notFound: true,
+    };
+  }
+  const singlePlanet = planets.find(
+    (planet) => planet.fields.slug === planetName
+  );
+  if (!singlePlanet) {
+    return {
+      notFound: true,
+    };
+  }
   // function parsUrlQuery(urlQuery: string | string[] | undefined): string {
   //   if (urlQuery === undefined) {
   //     return "";
@@ -84,14 +122,17 @@ export const getStaticProps: GetStaticProps<IHomeProps> = async ({
   // }
 
   // const singlePlanet = await getPlanetByName(planetName?.planet);
-  const singlePlanet = planets.find(
-    (planet) => planet.fields.slug === planetName
-  );
-  let name = singlePlanet?.fields.name;
-  let imgUrl = singlePlanet?.fields.images[0].fields.file.url;
-  let content = singlePlanet?.fields.content;
-  let source = singlePlanet?.fields.overviewSource;
 
+  let name = singlePlanet.fields.name;
+  let imgUrl = singlePlanet.fields.images[0].fields.file.url;
+  let content = singlePlanet.fields.content;
+  let source = singlePlanet.fields.overviewSource;
+  const fields = singlePlanet.fields;
+  const slug = singlePlanet.fields.slug;
+  const temperature = singlePlanet.fields.temperature;
+  const rotation = singlePlanet.fields.rotation;
+  const radius = singlePlanet.fields.radius;
+  const revolution = singlePlanet.fields.revolution;
   // singlePlanet?.map((single) => {
   //   imgUrl = single.images[0];
   //   content = single.content;
@@ -109,6 +150,9 @@ export const getStaticProps: GetStaticProps<IHomeProps> = async ({
       content,
       source,
       imgUrl,
+      fields,
+      temperature,
+      slug,
     },
   };
 };
