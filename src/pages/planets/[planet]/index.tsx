@@ -18,7 +18,7 @@ import PlanetPage from "@/components/PlanetPage";
 import { InferGetStaticPropsType } from "next";
 import { IPlanet, IPlanetFields } from "contentful/__generated__/types";
 import { ParsedUrlQuery } from "querystring";
-
+import Head from "next/head";
 interface IHomeProps {
   planets: IPlanet[];
   singlePlanet: IPlanet;
@@ -42,14 +42,22 @@ export default function HomePlanet({
   slug,
 }: IHomeProps) {
   return (
-    <PlanetPage
-      content={content}
-      source={source}
-      imgUrl={imgUrl}
-      planets={planets}
-      singlePlanet={singlePlanet}
-      slug={slug}
-    />
+    <>
+      <Head>
+        <title>{slug}</title>
+        <meta property="og:title" content="Planataruim" />
+        <meta property="og:title" content={slug} />
+        <meta property="og:description" content={content} />
+      </Head>
+      <PlanetPage
+        content={content}
+        source={source}
+        imgUrl={imgUrl}
+        planets={planets}
+        singlePlanet={singlePlanet}
+        slug={slug}
+      />
+    </>
   );
 }
 interface Params extends ParsedUrlQuery {
