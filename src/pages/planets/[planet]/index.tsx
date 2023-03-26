@@ -50,6 +50,8 @@ export default function HomePlanet({
 
         <meta property="og:description" content={content} />
         <meta property="og:image" content={imgUrl} />
+        <meta property="og:image:width" content="400" />
+        <meta property="og:image:height" content="300" />
       </Head>
       <PlanetPage
         content={content}
