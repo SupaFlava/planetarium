@@ -48,7 +48,8 @@ export default function HomePlanet({
         <meta property="og:type" content="article" />
 
         <meta property="og:description" content={content} />
-        <meta property="og:image" content={imgUrl} />
+        <meta property="og:image:secure_url" content={imgUrl} />
+        <meta property="og:image:type" content="image/svg" />
         <meta property="og:image:width" content="400" />
         <meta property="og:image:height" content="300" />
       </Head>
