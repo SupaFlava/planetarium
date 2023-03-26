@@ -11,6 +11,7 @@ import List from "@/components/ArticleSection/Styled.ListContainer";
 import { DesktopContainer } from "@/components/Responsive/Styled.desktopContainer";
 import { GeologyImg } from "./MainSection/img/Style.GeologyImg";
 import { IPlanet, IPlanetFields } from "contentful/__generated__/types";
+import Head from "next/head";
 
 interface IPlanetPageProps {
   planets: IPlanet[];
@@ -40,6 +41,16 @@ export default function PlanetPage(props: IPlanetPageProps) {
       {true}
 
       <LandingStrip>
+        <Head>
+          <meta property="og:title" content={slug} />
+          <meta property="og:type" content="article" />
+
+          <meta property="og:description" content={content} />
+          <meta property="og:image:secure_url" content={imgUrl} />
+          <meta property="og:image:type" content="image/svg" />
+          <meta property="og:image:width" content="400" />
+          <meta property="og:image:height" content="300" />
+        </Head>
         <NavBar
           subPage={subpage}
           singlePlanet={singlePlanet}
