@@ -45,9 +45,11 @@ export default function HomePlanet({
     <>
       <Head>
         <title>{slug}</title>
-        <meta property="og:title" content="Planataruim" />
         <meta property="og:title" content={slug} />
+        <meta property="og:type" content="article" />
+
         <meta property="og:description" content={content} />
+        <meta property="og:image" content={imgUrl} />
       </Head>
       <PlanetPage
         content={content}
