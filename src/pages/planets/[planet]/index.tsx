@@ -44,7 +44,6 @@ export default function HomePlanet({
   return (
     <>
       <Head>
-        <title>{slug}</title>
         <meta property="og:title" content={slug} />
         <meta property="og:type" content="article" />
 
