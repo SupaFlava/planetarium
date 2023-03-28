@@ -1,38 +1,55 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Planetarium
 
-## Getting Started
+Planetarium is a web-based application that lets users explore the solar system and learn about the different planets. The application was built using TypeScript, Next.js, and Contentful, and includes accurate scientific information about the planets.
 
-First, run the development server:
+This project was built using a template from Frontend Masters, which provided a starting point for the development of the application.
+Link to the design
+https://www.frontendmentor.io/challenges/planets-fact-site-gazqN8w_f
 
-```bash
+Why I Built This Project
+I built this project to learn more about web development using TypeScript and Next.js, and to explore the capabilities of the Contentful CMS. My goals for this project included:
+
+Building a responsive user interface that looks good on both desktop and mobile devices
+Deployment
+Learning how to use Next.js to generate static HTML pages for the application
+
+The deployed version of the application can be accessed at https://planetarium-nine.vercel.app/planets/earth.
+
+Screenshots and Design Overview
+Here is a screenshot of the Planetarium application:
+
+Planetarium screenshot
+
+<div style="display: flex; justify-content: space-between">
+<img src="./screenshots/planetarium-mobile.png" alt="Mobile version" width="20%">
+<img src="./screenshots/planetarium-tablet.png" alt="Tablet version" width="25%">
+<img src="./screenshots/planetarium-desktop2.png" alt="Desktop version" width="50%">
+
+</div>
+
+Todo List
+While the Planetarium application is functional, there are still several improvements that could be made:
+
+Fixing and imporoving the mobile menu.
+
+Installation
+To install and run the Planetarium application on your local machine, follow these steps:
+
+Clone the repository to your local machine:
+
+git clone https://github.com/SupaFlava/planetarium.git
+Install the dependencies using npm:
+
+cd planetarium
+npm install
+Start the development server:
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+This will start the application at http://localhost:3000. You can access the application by opening this URL in your browser.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+To build the production version of the application, use the following command:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+npm run build
+This will generate a production build of the application in the out directory. You can then deploy this directory to a hosting service of your choice.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+That's it! You should now be able to explore the solar system with the Planetarium application.
