@@ -9,7 +9,7 @@ export const GeologyImg = styled.img.attrs(({ src }) => ({
     display: none;
   } */
   display: none;
-  @media (min-width: 1441px) {
+  @media (min-width: 1440px) {
     display: block;
     position: absolute;
     z-index: 2;
