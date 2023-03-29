@@ -4,7 +4,6 @@ import { ImgContainer } from "@/components/MainSection/ImgContainer/Styled.ImgCo
 import { GlobalStyles } from "@/styles/global";
 import { theme } from "@/styles/theme";
 import { CoverImg } from "@/components/MainSection/img/Styled.CoverImg";
-import { LandingStrip } from "@/components/Responsive/Styled.LandingStrip";
 import { FactsContainer } from "@/components/ArticleSection/Styled.FactsContainer";
 import { MainSection } from "@/components/MainSection/ArticleContainer/Styled.ArticleContainer";
 import List from "@/components/ArticleSection/Styled.ListContainer";
@@ -40,39 +39,37 @@ export default function PlanetPage(props: IPlanetPageProps) {
       <GlobalStyles />
       {true}
 
-      <LandingStrip>
-        <Head>
-          <meta property="og:title" content={slug} />
-          <meta property="og:type" content="article" />
+      <Head>
+        <meta property="og:title" content={slug} />
+        <meta property="og:type" content="article" />
 
-          <meta property="og:description" content={content} />
-          <meta property="og:image" content={imgUrl} />
-          <meta property="og:image:width" content="400" />
-          <meta property="og:image:height" content="300" />
-        </Head>
-        <NavBar
-          subPage={subpage}
-          singlePlanet={singlePlanet}
-          planets={planets}
+        <meta property="og:description" content={content} />
+        <meta property="og:image" content={imgUrl} />
+        <meta property="og:image:width" content="400" />
+        <meta property="og:image:height" content="300" />
+      </Head>
+      <NavBar
+        subPage={subpage}
+        singlePlanet={singlePlanet}
+        planets={planets}
+        slug={slug}
+      ></NavBar>
+      <DesktopContainer>
+        <ImgContainer>
+          <CoverImg src={"https:" + imgUrl} />
+          {subpage === "geology" && <GeologyImg src={"https:" + geoImg} />}
+        </ImgContainer>
+        <MainSection
+          subpage={subpage}
+          content={content}
+          source={source}
           slug={slug}
-        ></NavBar>
-        <DesktopContainer>
-          <ImgContainer>
-            <CoverImg src={"https:" + imgUrl} />
-            {subpage === "geology" && <GeologyImg src={"https:" + geoImg} />}
-          </ImgContainer>
-          <MainSection
-            subpage={subpage}
-            content={content}
-            source={source}
-            slug={slug}
-            singlePlanet={singlePlanet}
-          ></MainSection>
-        </DesktopContainer>
-        <FactsContainer>
-          <List singlePlanet={singlePlanet}></List>
-        </FactsContainer>
-      </LandingStrip>
+          singlePlanet={singlePlanet}
+        ></MainSection>
+      </DesktopContainer>
+      <FactsContainer>
+        <List singlePlanet={singlePlanet}></List>
+      </FactsContainer>
     </ThemeProvider>
   );
 }

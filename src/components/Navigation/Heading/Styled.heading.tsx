@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Title = styled.h1`
+export const Title = styled.h1<{ className: string }>`
   color: ${(props) => props.theme.colors.txtColor};
 
   font-weight: 400;
