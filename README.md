@@ -1,4 +1,4 @@
-Planetarium
+<h3>Planetarium</h3>
 
 Planetarium is a web-based application that lets users explore the solar system and learn about the different planets. The application was built using TypeScript, Next.js, and Contentful, and includes accurate scientific information about the planets.
 
@@ -6,7 +6,7 @@ This project was built using a template from Frontend Masters, which provided a 
 Link to the design
 https://www.frontendmentor.io/challenges/planets-fact-site-gazqN8w_f
 
-Why I Built This Project
+<h3>Why I Built This Project</h3>
 I built this project to learn more about web development using TypeScript and Next.js, and to explore the capabilities of the Contentful CMS. My goals for this project included:
 
 Building a responsive user interface that looks good on both desktop and mobile devices
@@ -15,7 +15,7 @@ Learning how to use Next.js to generate static HTML pages for the application
 
 The deployed version of the application can be accessed at https://planetarium-nine.vercel.app/planets/earth.
 
-Screenshots and Design Overview
+<h3>Screenshots and Design Overview</h3>
 Here is a screenshot of the Planetarium application:
 
 Planetarium screenshot
@@ -27,12 +27,12 @@ Planetarium screenshot
 
 </div>
 
-Todo List
+<h3>Todo List</h3>
 While the Planetarium application is functional, there are still several improvements that could be made:
 
 Fixing and imporoving the mobile menu.
 
-Installation
+<h3>Installation </h3>
 To install and run the Planetarium application on your local machine, follow these steps:
 
 Clone the repository to your local machine:
