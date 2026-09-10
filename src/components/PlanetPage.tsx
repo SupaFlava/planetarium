@@ -1,4 +1,4 @@
-import styled, { ThemeProvider } from "styled-components";
+import { ThemeProvider } from "styled-components";
 import { NavBar } from "@/components/Navigation/NavBar";
 import { ImgContainer } from "@/components/MainSection/ImgContainer/Styled.ImgContainer";
 import { GlobalStyles } from "@/styles/global";
@@ -40,7 +40,7 @@ export default function PlanetPage(props: IPlanetPageProps) {
       {true}
 
       <Head>
-        <meta property="og:title" content={slug} />
+        <meta property="og:title" content={singlePlanet.fields.name} />
         <meta property="og:type" content="article" />
 
         <meta property="og:description" content={content} />

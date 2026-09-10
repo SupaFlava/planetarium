@@ -1,4 +1,5 @@
-import { IPlanet, IPlanetFields } from "contentful/__generated__/types";
+import { IPlanet } from "contentful/__generated__/types";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
@@ -57,9 +58,11 @@ const ActiveContainer = styled.div`
 export default function MobileMenuActive({
   open,
   planets,
+  onLinkClick,
 }: {
   planets: IPlanet[];
   open: boolean;
+  onLinkClick?: () => void;
 }) {
   return (
     <MenuActive open={open}>
@@ -71,11 +74,12 @@ export default function MobileMenuActive({
             <Link
               style={{ textDecoration: "none" }}
               href={`/planets/${planet.fields.slug}`}
+			  onClick={onLinkClick}
             >
               <h3>{planet.fields.name}</h3>
             </Link>
           </SeperationDiv>
-          <img src="/assets/icon-chevron.svg" />
+          <Image src="/assets/icon-chevron.svg" alt="decorative icon" />
         </ActiveContainer>
       ))}
     </MenuActive>

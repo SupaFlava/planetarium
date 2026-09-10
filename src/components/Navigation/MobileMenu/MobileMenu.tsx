@@ -1,4 +1,4 @@
-import { IPlanet, IPlanetFields } from "contentful/__generated__/types";
+import {IPlanetFields } from "contentful/__generated__/types";
 import Link from "next/link";
 import React from "react";
 import styled, { Tcolor } from "styled-components";
@@ -34,7 +34,7 @@ export default function MobileMenu({ subpage, slug }: ImobileMenuProps) {
       </DivLinks>
       <DivLinks color={slug} isActive={subpage === "geology"}>
         <Link href={`/planets/${slug}/geology`}>
-          <span>SURFACE</span>
+          <span>GEOLOGY</span>
         </Link>
       </DivLinks>
     </StyledMobileMenu>

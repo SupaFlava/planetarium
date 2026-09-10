@@ -29,7 +29,7 @@ export const NavBar = ({
         <StyledHeader>
           <Title className={antonio.className}>THE PLANETS</Title>
           <Burger open={open} setOpen={setOpen} />
-          <MobileMenuActive open={open} planets={planets} />
+          <MobileMenuActive open={open} onLinkClick={close} planets={planets} />
           <Menu className={spartan.className} planets={planets} />
         </StyledHeader>
       </StyledNavContainer>

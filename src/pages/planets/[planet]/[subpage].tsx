@@ -1,22 +1,20 @@
 import React from "react";
 import { GetStaticPaths, GetStaticProps } from "next/types";
-import { getPlanetByName, getPlanets } from "apiClient/planetsApi";
-import { IPlanet, IPlanetFields } from "contentful/__generated__/types";
+import { getPlanets } from "apiClient/planetsApi";
+import { IPlanet } from "contentful/__generated__/types";
 import PlanetPage from "@/components/PlanetPage";
 import { ParsedUrlQuery } from "querystring";
+import { isPlanetName, PlanetSlug } from "@/utils/planetSlug";
 
-interface ISubpageProps {
+interface IPlanetPageProps {
   planets: IPlanet[];
   singlePlanet: IPlanet;
   content: string;
   source: string;
   imgUrl: string;
-}
-interface IPlanetPageProps extends ISubpageProps {
-  geoImg: string;
+  geoImg: string | null;
   subpage: string;
-  name: string;
-  slug: IPlanetFields["slug"];
+  slug: PlanetSlug;
 }
 
 export default function Subpage(props: IPlanetPageProps) {
@@ -38,98 +36,86 @@ export default function Subpage(props: IPlanetPageProps) {
       content={content}
       source={source}
       imgUrl={imgUrl}
-      geoImg={geoImg}
+      geoImg={geoImg ?? undefined}
       planets={planets}
       singlePlanet={singlePlanet}
     />
   );
 }
+
 interface Params extends ParsedUrlQuery {
-  planet:
-    | "mercury"
-    | "earth"
-    | "mars"
-    | "venus"
-    | "uranus"
-    | "neptune"
-    | "saturn"
-    | "jupiter";
+  planet: PlanetSlug;
+  subpage: "geology" | "surface";
 }
+
 export const getStaticPaths: GetStaticPaths = async () => {
   const planets = await getPlanets();
   const paths = planets.flatMap((planet) => [
-    {
-      params: { planet: planet.fields.slug, subpage: "geology" },
-    },
-    {
-      params: { planet: planet.fields.slug, subpage: "surface" },
-    },
+    { params: { planet: planet.fields.slug, subpage: "geology" } },
+    { params: { planet: planet.fields.slug, subpage: "surface" } },
   ]);
 
   return {
-    paths: paths,
+    paths,
     fallback: false,
   };
 };
-function isPlanetName(name: string): name is slug {
-  return [
-    "mercury",
-    "earth",
-    "mars",
-    "venus",
-    "uranus",
-    "neptune",
-    "saturn",
-    "jupiter",
-  ].includes(name);
-}
-type slug = IPlanetFields["slug"];
 
-export const getStaticProps: GetStaticProps<{}> = async ({ params }) => {
-  const planets = await getPlanets();
-  const planetName = params?.planet as Params["planet"];
+export const getStaticProps: GetStaticProps<IPlanetPageProps> = async ({
+  params,
+}) => {
+  try {
+    const planets = await getPlanets();
+    const planetName = params?.planet as Params["planet"];
+    const subpage = params?.subpage as Params["subpage"];
 
-  if (!isPlanetName(planetName)) {
+    if (!isPlanetName(planetName)) {
+      return { notFound: true };
+    }
+
+    const singlePlanet = planets.find(
+      (planet) => planet.fields.slug === planetName
+    );
+    if (!singlePlanet) {
+      return { notFound: true };
+    }
+
+    const { images, slug } = singlePlanet.fields;
+    let imgUrl = images[0]?.fields.file.url;
+    let geoImg: string | null = null;
+    let content: string;
+    let source: string;
+
+    if (subpage === "surface") {
+      content = singlePlanet.fields.structureContent;
+      source = singlePlanet.fields.structureSource;
+      imgUrl = images[1]?.fields.file.url ?? imgUrl;
+    } else if (subpage === "geology") {
+      content = singlePlanet.fields.geologyContent;
+      source = singlePlanet.fields.geologySource;
+      geoImg = images[2]?.fields.file.url ?? null;
+    } else {
+      return { notFound: true };
+    }
+
+    if (!imgUrl) {
+      return { notFound: true };
+    }
+
     return {
-      notFound: true,
+      props: {
+        planets,
+        singlePlanet,
+        imgUrl,
+        geoImg,
+        content,
+        source,
+        slug,
+        subpage,
+      },
     };
+  } catch (error) {
+    console.error("Failed to fetch planet subpage data:", error);
+    return { notFound: true };
   }
-
-  const singlePlanet = planets.find(
-    (planet) => planet.fields.slug === planetName
-  );
-  if (!singlePlanet) {
-    return {
-      notFound: true,
-    };
-  }
-  let imgUrl = singlePlanet?.fields.images[0].fields.file.url;
-
-  // let imgUrl = singlePlanet[0].fields.images[0].fields.file.url;
-  let geoImg = null;
-  let content;
-  let source;
-  const slug = singlePlanet.fields.slug;
-  if (params?.subpage === "surface") {
-    content = singlePlanet.fields.structureContent;
-    source = singlePlanet.fields.structureSource;
-    imgUrl = singlePlanet.fields.images[1].fields.file.url;
-  } else if (params?.subpage === "geology") {
-    content = singlePlanet.fields.geologyContent;
-    source = singlePlanet.fields.geologySource;
-    geoImg = singlePlanet.fields.images[2].fields.file.url;
-  }
-
-  return {
-    props: {
-      planets: planets,
-      singlePlanet: singlePlanet,
-      imgUrl: imgUrl,
-      geoImg: geoImg,
-      content,
-      source,
-      slug,
-      subpage: params?.subpage,
-    },
-  };
 };

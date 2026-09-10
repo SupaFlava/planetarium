@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import react from "react";
 import { IPlanet } from "contentful/__generated__/types";
 
 export const ListContainer = styled.div`

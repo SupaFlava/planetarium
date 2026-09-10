@@ -1,4 +1,3 @@
-import React, { Children, useState } from "react";
 import styled, { Tcolor } from "styled-components";
 import { Para } from "./StyledParagraph/Styled.para";
 import { Title } from "@/components/Navigation/Heading/Styled.heading";
