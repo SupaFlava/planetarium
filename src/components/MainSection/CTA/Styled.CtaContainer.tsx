@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import LogoIm from "../../../../public/assets/icon-chevron.svg";
+import Image from "next/image";
 
 const LogoC = styled.img.attrs(({ src }) => ({
   src: src,
@@ -36,7 +36,7 @@ export const CtaContainer = () => {
     <CtaDiv>
       <SourceTxt>Source :</SourceTxt>
       <CtaTxt>Wikipedia</CtaTxt>
-      <img src="/assets/icon-source.svg" />{" "}
+      <Image alt="icon source" src="/assets/icon-source.svg" />{" "}
     </CtaDiv>
   );
 };

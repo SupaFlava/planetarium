@@ -1,5 +1,3 @@
-import { ThemeProvider } from "styled-components";
-
 export const theme = {
   colors: {
     txtColor: "#ffff",

@@ -18,12 +18,12 @@ interface IMenuProps {
   planets: IPlanet[];
   className?: string;
 }
-const Menu = ({ planets }: IMenuProps) => {
+const Menu = ({ planets, className }: IMenuProps) => {
   return (
     <>
-      <StyledMenu>
+      <StyledMenu className={className}>
         {planets.map((planet) => (
-          <AncherDiv color={planet.fields.slug} key={planet.fields.name}>
+          <AncherDiv color={planet.fields.slug} key={planet.fields.slug}>
             <Link href={`/planets/${planet.fields.slug}`}>
               <span>{planet.fields.name}</span>
             </Link>

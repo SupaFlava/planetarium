@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { StyledBurger } from "./Styled.Burger";
 
 type Props = {
